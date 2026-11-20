@@ -132,6 +132,7 @@ ol.cl li{text-align:justify}
 .sg b{color:var(--c)}
 .sg .ln{border-bottom:1px solid #6b7280;height:7mm;display:flex;align-items:flex-end;font-weight:600}
 .stamp{width:26mm;height:26mm;border:1px dashed #9ca3af;border-radius:50%;display:grid;place-items:center;color:#9ca3af;font-size:8pt;margin-inline-start:auto}
+.lref{margin:5mm 0 0;font-size:8pt;color:#4b5563;border-inline-start:2pt solid var(--c);padding-inline-start:2mm}
 .foot{margin-top:6mm;padding-top:2mm;border-top:1px solid color-mix(in srgb,var(--c) 35%,#fff);font-size:8pt;color:#4b5563;display:flex;flex-wrap:wrap;gap:1mm 5mm;justify-content:center}
 
 #printArea{display:none}
@@ -293,6 +294,7 @@ function buildDoc(form){
       body.appendChild(sg)}
   });
   doc.appendChild(body);
+  if(form.ref)doc.appendChild(el('p',{class:'lref'},(lang==='ar'?'المرجع: ':'Reference: ')+T(form.ref)));
   var ft=el('div',{class:'foot'});
   [lang==='ar'?co.est_address:(co.est_address_en||co.est_address),co.phone&&((lang==='ar'?'ت: ':'Tel: ')+co.phone),co.email,co.cr_no&&((lang==='ar'?'س.ت: ':'CR: ')+co.cr_no),co.tax_no&&((lang==='ar'?'ب.ض: ':'Tax: ')+co.tax_no)].forEach(function(x){if(x)ft.appendChild(el('span',null,x))});
   doc.appendChild(ft);
@@ -300,6 +302,15 @@ function buildDoc(form){
 }
 
 /* ---- UI ---- */
+var TIPS={
+ absence_warning:'يُرسل بخطاب موصى عليه بعلم الوصول. وفقًا للمادة 166: الإنذار بعد 10 أيام غياب متقطعة أو 5 أيام متصلة، والحد أكثر من 20 يومًا متقطعة في السنة أو أكثر من 10 أيام متصلة.',
+ contract_fixed:'فترة الاختبار لا تزيد على 3 أشهر (م 90). العقد يُحرَّر بالعربية من 4 نسخ (م 89).',
+ contract_open:'فترة الاختبار لا تزيد على 3 أشهر (م 90). العقد يُحرَّر بالعربية من 4 نسخ (م 89). مهلة الإخطار يحددها القانون ولا يجوز تقصيرها.',
+ penalty:'الجزاء يُوقَّع خلال 30 يومًا من انتهاء التحقيق، والفصل من اختصاص المحكمة العمالية (م 148).',
+ inv_notice:'يبدأ التحقيق خلال 7 أيام من اكتشاف المخالفة، وللعامل الاستعانة بممثل نقابي.',
+ settlement:'إقرار «عدم وجود مستحقات أخرى» اختياري. التنازل عن حقوق قررها القانون قد لا يُعتد به، فاستخدمه بحذر.',
+ leave:'الإجازة السنوية 15 يومًا في السنة الأولى و21 يومًا بعدها (م 124). العارضة حتى 7 أيام في السنة وبحد أقصى يومين في المرة.'
+};
 function form(){return FORMS.filter(function(f){return f.id===cur})[0]}
 function renderCats(){
   var q=($('#q').value||'').trim().toLowerCase(),box=$('#cats');box.innerHTML='';var n=0;
@@ -326,6 +337,7 @@ function input(k,obj,save,after){
 function renderFields(){
   var f=form();$('#formTitle').textContent=f.t[0]+' · '+f.t[1];
   $('#formHint').textContent=CATS[f.cat][0]+' — البيانات المشتركة (اسم الموظف، الوظيفة…) بتفضل محفوظة وإنت بتنقل بين النماذج.';
+  if(TIPS[f.id])$('#formHint').textContent=TIPS[f.id];
   var g=$('#fGrid');g.innerHTML='';
   var keys=f.f.slice(); if(lang==='en'){['emp_name','job','dept'].forEach(function(k){if(keys.indexOf(k)>-1&&keys.indexOf(k+'_en')<0)keys.splice(keys.indexOf(k)+1,0,k+'_en')})}
   if(keys.indexOf('doc_date')<0)keys.push('doc_date'); if(f.letter&&keys.indexOf('ref_no')<0)keys.push('ref_no');

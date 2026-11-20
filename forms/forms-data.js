@@ -100,6 +100,7 @@
   F('last_day', 'آخر يوم عمل', 'Last working day', 'date');
   F('settle_amount', 'إجمالي المستحقات المسددة', 'Total amount paid', 'money');
   F('settle_items', 'بنود المستحقات', 'Items paid', 'textarea');
+  F('settle_waiver', 'إضافة إقرار بعدم وجود مستحقات أخرى', 'Add no-further-claims statement', 'select', { opts: [['no', 'لا', 'No'], ['yes', 'نعم', 'Yes']] });
   F('end_service', 'تاريخ انتهاء الخدمة', 'End of service date', 'date');
   F('addressee', 'الجهة الموجَّه إليها', 'Addressed to');
   F('bank_name', 'اسم البنك', 'Bank name');
@@ -173,7 +174,7 @@
         { p: 'This offer is subject to submitting the hiring documents and signing the employment contract, and is valid until {offer_valid}. Please sign below to confirm your acceptance.' },
         { sign: [['عن الشركة', 'For the company'], ['قبول المرشح', 'Candidate acceptance']] }] },
 
-    { id: 'contract_fixed', cat: 'hire', t: ['عقد عمل محدد المدة', 'Fixed-Term Employment Contract'],
+    { id: 'contract_fixed', ref: ['قانون العمل رقم 14 لسنة 2025: المادة (89) كتابة العقد ونسخه، والمادة (90) فترة الاختبار.','Labour Law No. 14 of 2025: Article 89 (written contract and copies), Article 90 (probation).'], cat: 'hire', t: ['عقد عمل محدد المدة', 'Fixed-Term Employment Contract'],
       f: ['emp_name', 'nid', 'emp_address', 'job', 'work_place', 'start_date', 'end_date', 'probation', 'salary_gross', 'work_hours', 'doc_date'],
       ar: [{ p: 'إنه في يوم {doc_date} تحرر هذا العقد بين كل من:' },
         { p: 'أولًا: {est_name}، ومقرها {est_address}، سجل تجاري رقم {cr_no}، ويمثلها {applicant_name} بصفته {applicant_role} (طرف أول).' },
@@ -181,13 +182,13 @@
         { p: 'وقد اتفق الطرفان، وهما بكامل أهليتهما القانونية، على ما يلي:' },
         { ol: ['يعمل الطرف الثاني لدى الطرف الأول بوظيفة {job}، ومقر العمل {work_place}، ويلتزم بأداء المهام المحددة بالوصف الوظيفي وما يُكلَّف به في حدود وظيفته.',
           'مدة هذا العقد تبدأ من {start_date} وتنتهي في {end_date}، ويجوز تجديده باتفاق الطرفين كتابةً.',
-          'يخضع الطرف الثاني لفترة اختبار مدتها {probation}، وفقًا لأحكام قانون العمل.',
+          'يخضع الطرف الثاني لفترة اختبار مدتها {probation}، بما لا يجاوز ثلاثة أشهر، ولا يجوز تعيينه تحت الاختبار لدى صاحب العمل أكثر من مرة، وفقًا للمادة (90) من قانون العمل.',
           'يتقاضى الطرف الثاني أجرًا شهريًا إجماليًا قدره {salary_gross}، يُصرف في نهاية كل شهر، ويخضع للاستقطاعات القانونية من تأمينات اجتماعية وضرائب.',
           'ساعات العمل {work_hours}، ويستحق الطرف الثاني الراحة الأسبوعية والإجازات وفقًا لأحكام قانون العمل ولائحة المنشأة.',
           'يقر الطرف الثاني باطلاعه على لائحة تنظيم العمل والجزاءات المعتمدة بالمنشأة والتزامه بها، وبالمحافظة على أسرار العمل أثناء الخدمة وبعدها.',
           'يُشترك عن الطرف الثاني في التأمينات الاجتماعية وفقًا للقانون.',
           'فيما لم يرد به نص في هذا العقد تسري أحكام قانون العمل رقم 14 لسنة 2025 ولائحة المنشأة.',
-          'تحرر هذا العقد من ثلاث نسخ، بيد كل طرف نسخة، وتودع الثالثة بمكتب التأمينات الاجتماعية المختص.'] },
+          'تحرر هذا العقد باللغة العربية من أربع نسخ: نسخة لكل طرف، ونسخة تودع بمكتب التأمينات الاجتماعية المختص، ونسخة للجهة الإدارية المختصة، وذلك وفقًا للمادة (89) من قانون العمل رقم 14 لسنة 2025.'] },
         sign(['party1', 'party2'])],
       en: [{ p: 'This contract is made on {doc_date} between:' },
         { p: 'First: {est_name_en}, located at {est_address_en}, commercial register no. {cr_no}, represented by {signatory_en}, {signatory_role_en} (First Party).' },
@@ -195,16 +196,16 @@
         { p: 'Both parties, having full legal capacity, agree as follows:' },
         { ol: ['The Second Party shall work for the First Party as {job_en} at {work_place}, performing the duties in the job description and any related tasks assigned within the scope of the job.',
           'This contract starts on {start_date} and ends on {end_date}. It may be renewed by written agreement of both parties.',
-          'The Second Party is subject to a probation period of {probation}, in accordance with the Labour Law.',
+          'The Second Party is subject to a probation period of {probation}, not exceeding three months, and may not be placed on probation by the same employer more than once, in accordance with Article (90) of the Labour Law.',
           'The Second Party shall receive a gross monthly salary of {salary_gross}, paid at the end of each month, subject to statutory social insurance and tax deductions.',
           'Working hours are {work_hours}. The Second Party is entitled to weekly rest and leave in accordance with the Labour Law and the company regulations.',
           'The Second Party confirms having read and accepted the company’s work regulations and disciplinary rules, and shall keep business information confidential during and after employment.',
           'The Second Party shall be registered for social insurance in accordance with the law.',
           'Matters not covered by this contract are governed by Labour Law No. 14 of 2025 and the company regulations.',
-          'This contract is made in three copies: one for each party and one filed with the competent social insurance office.'] },
+          'This contract is written in Arabic in four copies: one for each party, one filed with the competent social insurance office, and one with the competent administrative authority, in accordance with Article (89) of Labour Law No. 14 of 2025.'] },
         sign(['party1', 'party2'])] },
 
-    { id: 'contract_open', cat: 'hire', t: ['عقد عمل غير محدد المدة', 'Indefinite Employment Contract'],
+    { id: 'contract_open', ref: ['قانون العمل رقم 14 لسنة 2025: المادة (89) كتابة العقد ونسخه، والمادة (90) فترة الاختبار.','Labour Law No. 14 of 2025: Article 89 (written contract and copies), Article 90 (probation).'], cat: 'hire', t: ['عقد عمل غير محدد المدة', 'Indefinite Employment Contract'],
       f: ['emp_name', 'nid', 'emp_address', 'job', 'work_place', 'start_date', 'probation', 'salary_gross', 'work_hours', 'doc_date'],
       ar: [{ p: 'إنه في يوم {doc_date} تحرر هذا العقد بين كل من:' },
         { p: 'أولًا: {est_name}، ومقرها {est_address}، سجل تجاري رقم {cr_no}، ويمثلها {applicant_name} بصفته {applicant_role} (طرف أول).' },
@@ -212,14 +213,14 @@
         { p: 'وقد اتفق الطرفان، وهما بكامل أهليتهما القانونية، على ما يلي:' },
         { ol: ['يعمل الطرف الثاني لدى الطرف الأول بوظيفة {job}، ومقر العمل {work_place}، ويلتزم بأداء المهام المحددة بالوصف الوظيفي وما يُكلَّف به في حدود وظيفته.',
           'هذا العقد غير محدد المدة، ويبدأ سريانه من {start_date}.',
-          'يخضع الطرف الثاني لفترة اختبار مدتها {probation}، وفقًا لأحكام قانون العمل.',
+          'يخضع الطرف الثاني لفترة اختبار مدتها {probation}، بما لا يجاوز ثلاثة أشهر، ولا يجوز تعيينه تحت الاختبار لدى صاحب العمل أكثر من مرة، وفقًا للمادة (90) من قانون العمل.',
           'يتقاضى الطرف الثاني أجرًا شهريًا إجماليًا قدره {salary_gross}، يُصرف في نهاية كل شهر، ويخضع للاستقطاعات القانونية من تأمينات اجتماعية وضرائب.',
           'ساعات العمل {work_hours}، ويستحق الطرف الثاني الراحة الأسبوعية والإجازات وفقًا لأحكام قانون العمل ولائحة المنشأة.',
           'يقر الطرف الثاني باطلاعه على لائحة تنظيم العمل والجزاءات المعتمدة بالمنشأة والتزامه بها، وبالمحافظة على أسرار العمل أثناء الخدمة وبعدها.',
           'يجوز لأي من الطرفين إنهاء هذا العقد بإخطار كتابي وفقًا للمدد والشروط المنصوص عليها في قانون العمل.',
           'يُشترك عن الطرف الثاني في التأمينات الاجتماعية وفقًا للقانون.',
           'فيما لم يرد به نص في هذا العقد تسري أحكام قانون العمل رقم 14 لسنة 2025 ولائحة المنشأة.',
-          'تحرر هذا العقد من ثلاث نسخ، بيد كل طرف نسخة، وتودع الثالثة بمكتب التأمينات الاجتماعية المختص.'] },
+          'تحرر هذا العقد باللغة العربية من أربع نسخ: نسخة لكل طرف، ونسخة تودع بمكتب التأمينات الاجتماعية المختص، ونسخة للجهة الإدارية المختصة، وذلك وفقًا للمادة (89) من قانون العمل رقم 14 لسنة 2025.'] },
         sign(['party1', 'party2'])],
       en: [{ p: 'This contract is made on {doc_date} between:' },
         { p: 'First: {est_name_en}, located at {est_address_en}, commercial register no. {cr_no}, represented by {signatory_en}, {signatory_role_en} (First Party).' },
@@ -227,14 +228,14 @@
         { p: 'Both parties, having full legal capacity, agree as follows:' },
         { ol: ['The Second Party shall work for the First Party as {job_en} at {work_place}, performing the duties in the job description and any related tasks assigned within the scope of the job.',
           'This is an indefinite contract, effective from {start_date}.',
-          'The Second Party is subject to a probation period of {probation}, in accordance with the Labour Law.',
+          'The Second Party is subject to a probation period of {probation}, not exceeding three months, and may not be placed on probation by the same employer more than once, in accordance with Article (90) of the Labour Law.',
           'The Second Party shall receive a gross monthly salary of {salary_gross}, paid at the end of each month, subject to statutory social insurance and tax deductions.',
           'Working hours are {work_hours}. The Second Party is entitled to weekly rest and leave in accordance with the Labour Law and the company regulations.',
           'The Second Party confirms having read and accepted the company’s work regulations and disciplinary rules, and shall keep business information confidential during and after employment.',
           'Either party may end this contract by written notice, following the notice periods and conditions set out in the Labour Law.',
           'The Second Party shall be registered for social insurance in accordance with the law.',
           'Matters not covered by this contract are governed by Labour Law No. 14 of 2025 and the company regulations.',
-          'This contract is made in three copies: one for each party and one filed with the competent social insurance office.'] },
+          'This contract is written in Arabic in four copies: one for each party, one filed with the competent social insurance office, and one with the competent administrative authority, in accordance with Article (89) of Labour Law No. 14 of 2025.'] },
         sign(['party1', 'party2'])] },
 
     { id: 'docs_checklist', cat: 'hire', t: ['قائمة مستندات التعيين', 'Hiring Documents Checklist'], f: ['emp_name', 'job', 'hire_date'],
@@ -262,7 +263,7 @@
       ar: [{ p: 'أقر أنا {emp_name}، الوظيفة {job}، بأنني قد تسلمت نسخة من لائحة تنظيم العمل ولائحة الجزاءات المعتمدتين في {est_name}، واطلعت عليهما وفهمت ما ورد بهما، وألتزم بالعمل بموجبهما وبما يطرأ عليهما من تعديلات يتم إخطاري بها.' }, { kv: [['doc_date', 'التاريخ']] }, sign(['emp', 'hr'])],
       en: [{ p: 'I, {emp_name_en}, {job_en}, confirm that I have received a copy of the work regulations and disciplinary rules approved by {est_name_en}. I have read and understood them, and I agree to follow them and any amendments notified to me.' }, { kv: [['doc_date', 'Date']] }, sign(['emp', 'hr'])] },
 
-    { id: 'probation_eval', cat: 'staff', t: ['تقييم فترة الاختبار', 'Probation Review'], f: ['emp_name', 'job', 'dept', 'hire_date', 'manager'],
+    { id: 'probation_eval', ref: ['قانون العمل رقم 14 لسنة 2025: المادة (90) — فترة الاختبار لا تزيد على ثلاثة أشهر ولا تتكرر لدى صاحب العمل نفسه.','Labour Law No. 14 of 2025: Article 90 — probation up to three months, once per employer.'], cat: 'staff', t: ['تقييم فترة الاختبار', 'Probation Review'], f: ['emp_name', 'job', 'dept', 'hire_date', 'manager'],
       ar: [empKV([['hire_date', 'تاريخ التعيين'], ['manager', 'المقيِّم']]),
         { grid: ['المعيار', 'دون المتوقع', 'يحقق المتوقع', 'يفوق المتوقع', 'ملاحظات'], rows: [['جودة العمل ودقته'], ['الإنتاجية والالتزام بالمواعيد'], ['المعرفة الفنية'], ['التعاون والعمل الجماعي'], ['الانضباط والحضور'], ['القدرة على التعلم']] },
         { checksStatic: ['تثبيت الموظف', 'إنهاء التعاقد خلال فترة الاختبار'], label: 'التوصية' }, { h: 'مبررات التوصية' }, { lines: 3 }, sign(['mgr', 'hr', 'gm'])],
@@ -270,7 +271,7 @@
         { grid: ['Criterion', 'Below', 'Meets', 'Exceeds', 'Notes'], rows: [['Quality & accuracy'], ['Productivity & deadlines'], ['Technical knowledge'], ['Teamwork'], ['Discipline & attendance'], ['Ability to learn']] },
         { checksStatic: ['Confirm employment', 'End contract during probation'], label: 'Recommendation' }, { h: 'Justification' }, { lines: 3 }, sign(['mgr', 'hr', 'gm'])] },
 
-    { id: 'leave', cat: 'staff', t: ['طلب إجازة', 'Leave Request'], f: ['emp_name', 'job', 'dept', 'leave_type', 'from_date', 'to_date', 'days', 'substitute', 'doc_date'],
+    { id: 'leave', ref: ['قانون العمل رقم 14 لسنة 2025: المادة (124) الإجازة السنوية.','Labour Law No. 14 of 2025: Article 124 (annual leave).'], cat: 'staff', t: ['طلب إجازة', 'Leave Request'], f: ['emp_name', 'job', 'dept', 'leave_type', 'from_date', 'to_date', 'days', 'substitute', 'doc_date'],
       ar: [empKV(), { checks: 'leave_type', label: 'نوع الإجازة' }, { kv: [['from_date', 'من'], ['to_date', 'إلى'], ['days', 'عدد الأيام'], ['substitute', 'القائم بالعمل'], ['doc_date', 'تاريخ الطلب']] },
         { h: 'خاص بالموارد البشرية' }, { kv: [['_', 'الرصيد قبل الإجازة'], ['_', 'الرصيد بعد الإجازة']] }, sign(['emp', 'mgr', 'hr'])],
       en: [empKV(), { checks: 'leave_type', label: 'Leave type' }, { kv: [['from_date', 'From'], ['to_date', 'To'], ['days', 'Days'], ['substitute', 'Covering colleague'], ['doc_date', 'Request date']] },
@@ -323,20 +324,20 @@
       en: [{ p: 'On {inv_date} at {inv_time}, at {inv_place}, the undersigned {investigator} investigated:' }, empKV(), { p: 'Subject: {incident}' },
         { p: 'The employee was informed of the allegation and asked:' }, { qa: 6 }, { p: 'The minutes were closed after being read to the employee.' }, sign(['inv', 'emp'])] },
 
-    { id: 'penalty', cat: 'disc', t: ['قرار جزاء', 'Disciplinary Decision'], letter: true, f: ['emp_name', 'job', 'incident_date', 'incident', 'inv_date', 'penalty', 'doc_date', 'ref_no'],
+    { id: 'penalty', ref: ['قانون العمل رقم 14 لسنة 2025: المادة (148) اختصاص المحكمة العمالية بجزاء الفصل.','Labour Law No. 14 of 2025: Article 148 (dismissal reserved to the labour court).'], cat: 'disc', t: ['قرار جزاء', 'Disciplinary Decision'], letter: true, f: ['emp_name', 'job', 'incident_date', 'incident', 'inv_date', 'penalty', 'doc_date', 'ref_no'],
       ar: [{ subj: 'قرار جزاء' }, { p: 'بعد الاطلاع على لائحة الجزاءات المعتمدة بـ{est_name}، وعلى محضر التحقيق المؤرخ {inv_date} مع السيد/ة {emp_name} — {job}، وما ثبت في حقه من: {incident} بتاريخ {incident_date}؛' },
-        { h: 'قررنا' }, { p: 'مجازاة الموظف المذكور بـ: {penalty}، وفقًا لأحكام قانون العمل ولائحة الجزاءات المعتمدة.' }, { p: 'ويحق للموظف التظلم من هذا القرار وفقًا للإجراءات والمواعيد المقررة قانونًا.' },
+        { h: 'قررنا' }, { p: 'مجازاة الموظف المذكور بـ: {penalty}، وفقًا لأحكام قانون العمل ولائحة الجزاءات المعتمدة.' }, { p: 'ويحق للموظف التظلم من هذا القرار وفقًا للإجراءات والمواعيد المقررة قانونًا. ولا يجوز توقيع جزاء الفصل إلا من المحكمة العمالية المختصة وفقًا للمادة (148) من قانون العمل.' },
         { sign: [['صاحب العمل / المفوَّض', 'Employer / authorised signatory'], ['استلمت نسخة', 'Received by']] }],
       en: [{ subj: 'Disciplinary Decision' }, { p: 'Having reviewed the disciplinary rules approved by {est_name_en} and the investigation minutes dated {inv_date} with Mr./Ms. {emp_name_en} — {job_en}, and it having been established that on {incident_date}: {incident};' },
-        { h: 'It is decided' }, { p: 'to impose the following penalty on the said employee: {penalty}, in accordance with the Labour Law and the approved disciplinary rules.' }, { p: 'The employee may file a grievance against this decision following the procedures and deadlines set by law.' },
+        { h: 'It is decided' }, { p: 'to impose the following penalty on the said employee: {penalty}, in accordance with the Labour Law and the approved disciplinary rules.' }, { p: 'The employee may file a grievance against this decision following the procedures and deadlines set by law. Dismissal may only be imposed by the competent labour court, in accordance with Article (148) of the Labour Law.' },
         { sign: [['صاحب العمل / المفوَّض', 'Employer / authorised signatory'], ['استلمت نسخة', 'Received by']] }] },
 
-    { id: 'absence_warning', cat: 'disc', t: ['إنذار بالانقطاع عن العمل', 'Absence Warning Notice'], letter: true, f: ['emp_name', 'job', 'emp_address', 'absence_from', 'absence_days', 'return_within', 'doc_date', 'ref_no'],
+    { id: 'absence_warning', ref: ['قانون العمل رقم 14 لسنة 2025: المادة (166) الغياب دون مبرر مشروع.','Labour Law No. 14 of 2025: Article 166 (absence without legitimate excuse).'], cat: 'disc', t: ['إنذار بالانقطاع عن العمل', 'Absence Warning Notice'], letter: true, f: ['emp_name', 'job', 'emp_address', 'absence_from', 'absence_days', 'return_within', 'doc_date', 'ref_no'],
       ar: [{ to: 'السيد/ة {emp_name} — {job}\nالمقيم في: {emp_address}' }, { subj: 'إنذار بالانقطاع عن العمل' }, { p: 'نحيطكم علمًا بأنكم منقطعون عن العمل دون إذن أو عذر مقبول منذ {absence_from}، وبلغت مدة الانقطاع حتى تاريخه {absence_days} يومًا.' },
-        { p: 'لذا ننذركم بضرورة العودة إلى العمل وتقديم ما يبرر غيابكم خلال {return_within} أيام من تاريخ استلام هذا الإنذار، وإلا ستضطر الشركة لاتخاذ الإجراءات المقررة في قانون العمل ولائحة المنشأة، بما فيها إنهاء علاقة العمل.' },
+        { p: 'لذا ننذركم بضرورة العودة إلى العمل وتقديم ما يبرر غيابكم خلال {return_within} أيام من تاريخ استلام هذا الإنذار، وإلا ستتخذ الشركة الإجراءات المقررة في المادة (166) من قانون العمل رقم 14 لسنة 2025.' },
         { note: 'يُرسل بخطاب مسجل بعلم الوصول على آخر عنوان مسجل للموظف، مع الاحتفاظ بصورة الإيصال.' }, { sign: [['الموارد البشرية', 'HR']] }],
       en: [{ to: 'Mr./Ms. {emp_name_en} — {job_en}\nAddress: {emp_address}' }, { subj: 'Absence Warning Notice' }, { p: 'You have been absent from work without permission or acceptable excuse since {absence_from}, a total of {absence_days} days to date.' },
-        { p: 'You are hereby warned to return to work and justify your absence within {return_within} days of receiving this notice. Otherwise, the company will take the measures set out in the Labour Law and the company regulations, which may include ending your employment.' },
+        { p: 'You are hereby warned to return to work and justify your absence within {return_within} days of receiving this notice. Otherwise, the company will take the measures provided for in Article (166) of Labour Law No. 14 of 2025.' },
         { note: 'Send by registered mail with acknowledgement of receipt to the employee’s last registered address, and keep the receipt.' }, { sign: [['الموارد البشرية', 'HR']] }] },
 
     /* ===== Performance & Training ===== */
@@ -383,11 +384,11 @@
       en: [empKV([['hire_date', 'Hire date'], ['last_day', 'Last working day']]), { checksStatic: ['Better opportunity', 'Pay & benefits', 'Relationship with manager', 'Work environment', 'Growth', 'Personal reasons', 'Other'], label: 'Reason for leaving' },
         { p: 'What did you like about working here?' }, { lines: 2 }, { p: 'What should we improve?' }, { lines: 2 }, { p: 'Would you recommend us as an employer? Why?' }, { lines: 2 }, sign(['emp', 'hr'])] },
 
-    { id: 'settlement', cat: 'exit', t: ['مخالصة نهائية', 'Final Settlement Receipt'], f: ['emp_name', 'nid', 'job', 'hire_date', 'end_service', 'settle_items', 'settle_amount', 'doc_date'],
+    { id: 'settlement', cat: 'exit', t: ['مخالصة نهائية', 'Final Settlement Receipt'], f: ['emp_name', 'nid', 'job', 'hire_date', 'end_service', 'settle_items', 'settle_amount', 'settle_waiver', 'doc_date'],
       ar: [{ p: 'أقر أنا {emp_name}، رقم قومي {nid}، والذي كنت أعمل لدى {est_name} بوظيفة {job} في الفترة من {hire_date} حتى {end_service}، بأنني قد استلمت مبلغًا إجماليًا قدره {settle_amount}، وذلك قيمة:' }, { p: '{settle_items}', box: true },
-        { p: 'وذلك عن المستحقات المبينة أعلاه.' }, { kv: [['doc_date', 'التاريخ']] }, sign(['emp', 'hr', 'fin'])],
+        { p: 'وذلك عن المستحقات المبينة أعلاه.' }, { p: 'وبذلك أكون قد استلمت كافة مستحقاتي لدى الشركة عن مدة خدمتي، وليس لي أي مستحقات أخرى قِبَلها.', when: ['settle_waiver', 'yes'] }, { kv: [['doc_date', 'التاريخ']] }, sign(['emp', 'hr', 'fin'])],
       en: [{ p: 'I, {emp_name_en}, national ID {nid}, formerly employed by {est_name_en} as {job_en} from {hire_date} to {end_service}, confirm that I have received a total of {settle_amount}, being:' }, { p: '{settle_items}', box: true },
-        { p: 'in respect of the dues listed above.' }, { kv: [['doc_date', 'Date']] }, sign(['emp', 'hr', 'fin'])] },
+        { p: 'in respect of the dues listed above.' }, { p: 'I confirm that I have received all my dues from the company for my period of service and have no further claims against it.', when: ['settle_waiver', 'yes'] }, { kv: [['doc_date', 'Date']] }, sign(['emp', 'hr', 'fin'])] },
 
     /* ===== Letters & certificates ===== */
     { id: 'hr_letter', cat: 'letters', t: ['خطاب لمن يهمه الأمر (HR Letter)', 'To Whom It May Concern'], letter: true, f: ['emp_name', 'nid', 'job', 'hire_date', 'show_salary', 'salary_gross', 'doc_date', 'ref_no'],

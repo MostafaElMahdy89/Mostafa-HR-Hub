@@ -14,6 +14,7 @@
     applicant_name: 'أحمد محمد علي', applicant_role: 'مدير الموارد البشرية', applicant_ins: '987654321',
     applicant_nid: '28501010101234', applicant_phone: '01000000000',
     signatory_en: 'Ahmed Mohamed Ali', signatory_role_en: 'HR Manager',
+    ins_category: '1', est_type: 'regular',
     color: '#12264A', logo: ''
   };
 
@@ -29,7 +30,7 @@
     list: function () { return list; },
     active: function () { return list.filter(function (c) { return c.id === activeId; })[0]; },
     setActive: function (id) { activeId = id; write(ACT, id); emit(); },
-    add: function (name) { var c = { id: uid(), est_name: name || 'شركة جديدة', color: '#12264A', logo: '' }; list.push(c); api.save(); api.setActive(c.id); return c; },
+    add: function (name) { var c = { id: uid(), est_name: name || 'شركة جديدة', ins_category: '1', est_type: 'regular', color: '#12264A', logo: '' }; list.push(c); api.save(); api.setActive(c.id); return c; },
     remove: function (id) { list = list.filter(function (c) { return c.id !== id; }); if (!list.length) list = [JSON.parse(JSON.stringify(SAMPLE))]; api.save(); api.setActive(list[0].id); },
     save: function () { if (!write(KEY, list)) return false; return true; },
     onChange: function (f) { subs.push(f); },

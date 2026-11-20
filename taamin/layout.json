@@ -16,13 +16,40 @@
       "t": 38
      },
      {
-      "k": "cat1",
+      "k": "cat_1",
       "type": "check",
       "x": 397.1,
       "t": 107.6,
       "w": 19.9,
       "h": 18.9,
-      "fixed": true
+      "when": [
+       "ins_category",
+       "1"
+      ]
+     },
+     {
+      "k": "cat_2",
+      "type": "check",
+      "x": 88.2,
+      "t": 107.6,
+      "w": 19.8,
+      "h": 18.9,
+      "when": [
+       "ins_category",
+       "2"
+      ]
+     },
+     {
+      "k": "cat_3",
+      "type": "check",
+      "x": 396.8,
+      "t": 138.7,
+      "w": 19.9,
+      "h": 19.9,
+      "when": [
+       "ins_category",
+       "3"
+      ]
      },
      {
       "k": "applicant_name",
@@ -236,13 +263,52 @@
       ]
      },
      {
-      "k": "est_type",
+      "k": "est_regular",
       "type": "check",
       "x": 462.3,
       "t": 604.5,
       "w": 19.9,
       "h": 19.9,
-      "fixed": true
+      "when": [
+       "est_type",
+       "regular"
+      ]
+     },
+     {
+      "k": "est_car",
+      "type": "check",
+      "x": 401.9,
+      "t": 604.5,
+      "w": 19.9,
+      "h": 19.9,
+      "when": [
+       "est_type",
+       "car"
+      ]
+     },
+     {
+      "k": "est_boat",
+      "type": "check",
+      "x": 309.1,
+      "t": 604.5,
+      "w": 19.9,
+      "h": 19.9,
+      "when": [
+       "est_type",
+       "boat"
+      ]
+     },
+     {
+      "k": "est_bakery",
+      "type": "check",
+      "x": 216.3,
+      "t": 604.5,
+      "w": 19.9,
+      "h": 19.9,
+      "when": [
+       "est_type",
+       "bakery"
+      ]
      },
      {
       "k": "est_name",
@@ -321,8 +387,8 @@
      {
       "k": "est_no",
       "type": "text",
-      "r": 245,
-      "l": 30,
+      "r": 145,
+      "l": 15,
       "t": 411,
       "ltr": true
      },
@@ -332,29 +398,6 @@
       "r": 500,
       "l": 35,
       "t": 435
-     },
-     {
-      "k": "applicant_name",
-      "type": "text",
-      "r": 222,
-      "l": 68,
-      "t": 592,
-      "center": true
-     },
-     {
-      "k": "name",
-      "type": "text",
-      "r": 420,
-      "l": 305,
-      "t": 615
-     },
-     {
-      "k": "name",
-      "type": "text",
-      "r": 222,
-      "l": 78,
-      "t": 772,
-      "center": true
      }
     ]
    }
@@ -602,22 +645,6 @@
       "t": 393,
       "w": 19.9,
       "h": 19.9
-     },
-     {
-      "k": "name",
-      "type": "text",
-      "r": 533,
-      "l": 400,
-      "t": 592,
-      "center": true
-     },
-     {
-      "k": "applicant_name",
-      "type": "text",
-      "r": 233,
-      "l": 92,
-      "t": 592,
-      "center": true
      }
     ]
    }

@@ -111,12 +111,15 @@ td.num{font-variant-numeric:tabular-nums;direction:ltr;text-align:right}
 
 #printArea{display:none}
 @media print{
-  @page{size:8.5in 14in;margin:0}
   body{background:#fff;padding:0}
   header.top,main{display:none!important}
   #printArea{display:block}
-  #printArea .page{box-shadow:none;break-after:page;page-break-after:always}
-  #printArea .page:last-child{break-after:auto;page-break-after:auto}
+  #printArea .page{box-shadow:none}
+  #printArea .sheet{position:relative;overflow:hidden;break-after:page;page-break-after:always}
+  #printArea .sheet:last-child{break-after:auto;page-break-after:auto}
+  #printArea.a4 .sheet{width:210mm;height:297mm}
+  #printArea.a4 .page{zoom:.835;margin:0 auto}
+  #printArea.legal .sheet{width:8.5in;height:14in}
   .page{color:#0B2A8A}
 }
 @media (prefers-reduced-motion: reduce){*{transition:none!important}}
@@ -183,8 +186,9 @@ td.num{font-variant-numeric:tabular-nums;direction:ltr;text-align:right}
       <div class="btns" style="margin-top:12px;align-items:center">
         <button class="btn primary" id="printBtn" type="button">🖨 طباعة المحدد (وجه وظهر)</button>
         <label class="hint" style="display:flex;gap:6px;align-items:center"><input type="checkbox" id="backChk" checked> اطبع الظهر بعد كل وجه</label>
+        <label class="hint" style="display:flex;gap:6px;align-items:center">الورق <select id="paperSel"><option value="a4">A4</option><option value="legal">فولسكاب (Legal)</option></select></label>
       </div>
-      <p class="legal">الورق: 8.5×14 بوصة (فولسكاب/Legal) مثل الملف الأصلي. اطبع على الوجهين واختر «القلب من الحافة الطويلة». الأداة للمساعدة في التجهيز فقط، وراجع الاستمارة قبل التقديم.</p>
+      <p class="legal">A4 افتراضيًا: الاستمارة بتتصغّر لتناسب الصفحة. اختر فولسكاب لو هتطبع بمقاس الملف الأصلي. اطبع على الوجهين واختر «القلب من الحافة الطويلة». الأداة للمساعدة في التجهيز فقط، وراجع الاستمارة قبل التقديم.</p>
     </div>
   </div>
 </main>
@@ -199,7 +203,9 @@ var store={get:function(k,d){try{var v=localStorage.getItem(k);return v?JSON.par
 
 var EST=[
  ['office','مكتب التأمينات'],['est_name','اسم المنشأة'],['est_no','رقم المنشأة التأميني','digits',9],['est_address','عنوان المنشأة'],
- ['applicant_name','مقدم الطلب'],['applicant_role','صفة مقدم الطلب'],['applicant_ins','رقمه التأميني','digits',9],['applicant_nid','رقمه القومي','digits',14],['applicant_phone','رقم التليفون','phone']
+ ['applicant_name','مقدم الطلب'],['applicant_role','صفة مقدم الطلب'],['applicant_ins','رقمه التأميني','digits',9],['applicant_nid','رقمه القومي','digits',14],['applicant_phone','رقم التليفون','phone'],
+ ['ins_category','الفئة (نموذج 1)','choice',[['1','عاملين لدى الغير'],['2','أصحاب أعمال لهم منشآت'],['3','العاملين بالمخابز']]],
+ ['est_type','نوع المنشأة (نموذج 1)','choice',[['regular','نمطي'],['car','سيارة'],['boat','مركب صيد'],['bakery','مخابز بلدية']]]
 ];
 var EMP={
  f1:[['name','اسم المؤمن عليه'],['nid','الرقم القومي','digits',14],['ins_no','الرقم التأميني (إن وجد)','digits',9,true],['nationality','الجنسية'],['qualification','المؤهل'],['job','المهنة','job'],['start_date','تاريخ بدء الاشتراك','date'],['sector','القطاع',null,null,true],['sub_code','كود الاشتراك',null,null,true],['period_type','نوع المدة',null,null,true],['wage','أجر الاشتراك (جنيه)','money'],['total_wage','الأجر الشامل (جنيه)','money'],['medical','الكشف الطبي الابتدائي','yesno'],['addr_building','عقار رقم',null,null,true],['addr_street','الشارع',null,null,true],['addr_village','القرية',null,null,true],['addr_markaz','قسم / مركز'],['addr_gov','المحافظة']],
@@ -252,6 +258,7 @@ function fieldInput(def,obj,onChange){
   lab.appendChild(el('span',null,def[1]+(def[4]?' · اختياري':'')));
   var inp;
   if(def[2]==='yesno'){inp=el('select',{id:'in-'+k});['','نعم','لا'].forEach(function(o){var op=el('option',{value:o},o||'—');inp.appendChild(op)})}
+  else if(def[2]==='choice'){inp=el('select',{id:'in-'+k});inp.appendChild(el('option',{value:''},'—'));def[3].forEach(function(o){inp.appendChild(el('option',{value:o[0]},o[1]))})}
   else{inp=el('input',{id:'in-'+k,autocomplete:'off'}); if(['digits','date','money','phone'].indexOf(def[2])>-1){inp.className='ltr';inp.inputMode='numeric'} if(def[2]==='date')inp.placeholder='dd/mm/yyyy'; if(def[2]==='job')inp.setAttribute('list','jobs')}
   inp.value=obj[k]==null?'':obj[k];
   var msg=el('span',{class:'msg'});
@@ -320,7 +327,9 @@ function renderAll(){renderRows();renderEmp();renderPreview()}
 function doPrint(){
   var L=LAYOUT[form],pa=$('#printArea');pa.innerHTML='';var idx=selectedIdx();
   var incomplete=idx.filter(function(i){return completeness(data[form][i])<1}).length;
-  idx.forEach(function(i){pa.appendChild(buildPage(L.pages[0],data[form][i]));if($('#backChk').checked)pa.appendChild(buildPage(L.pages[1],data[form][i]))});
+  var paper=$('#paperSel').value;pa.className=paper;var ps=document.getElementById('pageSize')||document.head.appendChild(el('style',{id:'pageSize'}));ps.textContent='@media print{@page{size:'+(paper==='a4'?'A4':'8.5in 14in')+';margin:0}}';store.set('taamin-paper',paper);
+  function sheet(pg){var sh=el('div',{class:'sheet'});sh.appendChild(pg);return sh}
+  idx.forEach(function(i){pa.appendChild(sheet(buildPage(L.pages[0],data[form][i])));if($('#backChk').checked)pa.appendChild(sheet(buildPage(L.pages[1],data[form][i])))});
   var imgs=pa.querySelectorAll('img'),left=imgs.length;
   function go(){if(incomplete)toast(incomplete+' سجل ناقص البيانات، راجعه في المعاينة');setTimeout(function(){window.print()},50)}
   if(!left)return go();
@@ -360,6 +369,7 @@ var drop=$('#drop');['dragenter','dragover'].forEach(function(t){drop.addEventLi
 window.addEventListener('resize',fitScale);
 (function(){var root=document.documentElement;var t=store.get('mhh-theme-t',null);if(t)root.setAttribute('data-theme',t);$('#themeBtn').addEventListener('click',function(){var cur=root.getAttribute('data-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');var n=cur==='dark'?'light':'dark';root.setAttribute('data-theme',n);store.set('mhh-theme-t',n)})})();
 
+$('#paperSel').value=store.get('taamin-paper','a4');
 renderEst();
 fetch('layout.json').then(function(r){return r.json()}).then(function(j){LAYOUT=j;renderAll()}).catch(function(){toast('تعذّر تحميل قوالب النماذج')});
 })();
