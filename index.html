@@ -1,10 +1,14 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Mostafa HR Hub</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="Mostafa El Mahdy — HR & Organizational Development Consultant and Certified Trainer, Cairo, Egypt.">
 <link rel="icon" href="logo-mark.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Readex+Pro:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap">
 <style>
 /* Layout: bilingual (AR rtl / EN ltr) single column. Asymmetric hero (thesis + portrait), proof strip, services, anonymized engagements, tools, training, timeline, contact band. */
 :root{
@@ -25,6 +29,10 @@
   --band:#183058; --on-band:#FFFFFF; color-scheme:dark}
 
 *{box-sizing:border-box}
+html,body{margin:0}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+img{max-width:100%}
+[hidden]{display:none!important}
 html{scroll-behavior:smooth}
 @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
 body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.75}
@@ -32,6 +40,8 @@ html[lang="en"] body{line-height:1.65}
 html[lang="ar"] .en, html[lang="en"] .ar{display:none!important}
 .wrap{max-width:1140px;margin-inline:auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 h1,h2,h3{font-family:var(--display);line-height:1.25;text-wrap:balance;margin:0}
+html[lang="en"] h1,html[lang="en"] h2,html[lang="en"] h3,html[lang="en"] .proof b{font-family:"Bricolage Grotesque","Readex Pro",system-ui,sans-serif;font-optical-sizing:auto;letter-spacing:-.015em}
+html[lang="en"] .hero h1{font-size:clamp(2.6rem,7.5vw,6rem);font-weight:800;line-height:1.02;letter-spacing:-.03em}
 p{margin:0}
 a{color:inherit}
 :focus-visible{outline:3px solid var(--brand);outline-offset:3px;border-radius:6px}
