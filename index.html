@@ -126,6 +126,10 @@ section.alt{background:var(--surface);border-block:1px solid var(--line)}
 .status{align-self:flex-start;font-size:.78rem;font-weight:600;padding:3px 10px;border-radius:999px}
 .status.build{background:var(--gold-soft);color:var(--gold)}
 .status.soon{background:var(--line);color:var(--muted)}
+.status.live{background:var(--brand-soft);color:var(--brand)}
+a.tool{text-decoration:none;color:inherit;transition:transform .15s,border-color .15s}
+a.tool:hover{border-color:var(--brand);transform:translateY(-2px)}
+@media (prefers-reduced-motion: reduce){a.tool:hover{transform:none}}
 .local{font-size:.85rem;color:var(--brand);display:flex;align-items:center;gap:6px;margin-top:auto;padding-top:6px}
 .local::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--brand)}
 
@@ -292,24 +296,24 @@ footer{padding-block:28px;color:var(--muted);font-size:.86rem;display:flex;justi
         <p><span class="ar">تعمل داخل متصفحك مباشرة، ولا تُرسل بيانات الموظفين إلى أي خادم.</span><span class="en">They run in your browser. Employee data never leaves your device.</span></p>
       </div>
       <div class="tools">
-        <article class="tool">
+        <a class="tool" href="taamin/">
           <div class="art"><span>Excel</span>→<span>PDF</span></div>
           <div class="body">
-            <span class="status build"><span class="ar">قيد الإنشاء</span><span class="en">In progress</span></span>
+            <span class="status live"><span class="ar">متاح الآن</span><span class="en">Live</span></span>
             <h3><span class="ar">مُجهِّز استمارات التأمينات</span><span class="en">Social insurance forms builder</span></h3>
-            <p><span class="ar">ارفع شيت الموظفين واستخرج نماذج الهيئة القومية للتأمين الاجتماعي جاهزة للطباعة دفعة واحدة.</span><span class="en">Upload an employee sheet and get National Social Insurance forms ready to print, in one batch.</span></p>
+            <p><span class="ar">نموذج 1 ونموذج 6 وجه وظهر، من شيت Excel أو إدخال يدوي، مع البحث في أكواد المهن.</span><span class="en">Forms 1 and 6, front and back, from an Excel sheet or manual entry, with occupation-code search.</span></p>
             <span class="local"><span class="ar">يعمل محليًا على جهازك</span><span class="en">Runs locally</span></span>
           </div>
-        </article>
-        <article class="tool">
-          <div class="art"><span>⌕</span><span class="num">111305</span></div>
+        </a>
+        <a class="tool" href="forms/">
+          <div class="art"><span>35</span><span>A4</span></div>
           <div class="body">
-            <span class="status soon"><span class="ar">قريبًا</span><span class="en">Coming soon</span></span>
-            <h3><span class="ar">الباحث عن كود المهنة</span><span class="en">Occupation code finder</span></h3>
-            <p><span class="ar">ابحث باسم الوظيفة واحصل على كود المهنة وتصنيفها المعتمد في التأمينات.</span><span class="en">Search a job title and get its official insurance occupation code and classification.</span></p>
+            <span class="status live"><span class="ar">متاح الآن</span><span class="en">Live</span></span>
+            <h3><span class="ar">مكتبة نماذج وخطابات HR</span><span class="en">HR forms &amp; letters library</span></h3>
+            <p><span class="ar">من طلب التوظيف حتى المخالصة، وخطابات البنوك والسفارات، بلوجو شركتك وبياناتها، عربي أو إنجليزي.</span><span class="en">From application to final settlement, plus bank and embassy letters, with your company logo and details, in Arabic or English.</span></p>
             <span class="local"><span class="ar">يعمل محليًا على جهازك</span><span class="en">Runs locally</span></span>
           </div>
-        </article>
+        </a>
         <article class="tool">
           <div class="art"><span>ATS</span><span>Offline</span></div>
           <div class="body">
