@@ -107,6 +107,8 @@ details[open].panel>summary h2::after{content:"▴"}
 .dtitle span{border-bottom:1.5pt solid color-mix(in srgb,var(--c) 45%,transparent);padding-bottom:1mm}
 .body{flex:1;display:flex;flex-direction:column;gap:3mm;margin-top:3mm}
 .body p{margin:0;text-align:justify;white-space:pre-line}
+.photo{align-self:flex-end;width:28mm;height:35mm;border:1px dashed #9ca3af;border-radius:2mm;display:grid;place-items:center;color:#9ca3af;font-size:8pt;margin-inline-start:4mm}
+.body p.ctr{text-align:center;font-size:9.5pt;color:#374151;margin-top:-2mm}
 .body .to{font-weight:700;white-space:pre-line}
 .body .subj{text-align:center;font-weight:700;font-size:12pt;text-decoration:underline;text-underline-offset:4px}
 .body h4{margin:2mm 0 0;font-size:11pt;color:var(--c);font-family:"Readex Pro","IBM Plex Sans Arabic",sans-serif}
@@ -253,6 +255,7 @@ function fmt(k){
 function fill(node,text){ // replaces {k}; empty → dotted blank
   String(text).split(/(\{[a-z_]+\})/).forEach(function(part){
     var m=part.match(/^\{([a-z_]+)\}$/);
+    if(m&&m[1]==='_'){node.appendChild(el('span',{class:'blank',style:'min-width:70mm'}));return}
     if(!m){node.appendChild(document.createTextNode(part));return}
     var v=fmt(m[1]);
     if(v==null){node.appendChild(el('span',{class:'blank'}))}else{node.appendChild(el('span',{class:'val'},v))}
@@ -295,14 +298,15 @@ function buildDoc(form){
   meta.appendChild(fill(el('span'),(lang==='ar'?'التاريخ: ':'Date: ')+'{doc_date}'));
   doc.appendChild(meta);
   var hasSubj=(form[lang]||[]).some(function(b){return b.subj});
-  if(!form.letter||!hasSubj){var tt=el('div',{class:'dtitle'});tt.appendChild(el('span',null,T(form.t)));if(!form.letter||!hasSubj)doc.appendChild(tt)}
+  if(!hasSubj){var tt=el('div',{class:'dtitle'});tt.appendChild(el('span',null,T(form.t)));doc.appendChild(tt)}
   var body=el('div',{class:'body'});
   (form[lang]||[]).forEach(function(b){
     if(b.when&&raw(b.when[0])!==b.when[1])return;
     if(b.to!=null) body.appendChild(fill(el('div',{class:'to'}),b.to));
-    else if(b.subj!=null) body.appendChild(fill(el('div',{class:'subj'}),(lang==='ar'?'الموضوع: ':'Subject: ')+b.subj));
+    else if(b.subj!=null){if(form.letter)body.appendChild(fill(el('div',{class:'subj'}),(lang==='ar'?'الموضوع: ':'Subject: ')+b.subj));else{var t2=el('div',{class:'dtitle'});t2.appendChild(fill(el('span'),b.subj));body.appendChild(t2)}}
     else if(b.h!=null) body.appendChild(el('h4',null,b.h));
-    else if(b.p!=null) body.appendChild(fill(el('p',b.box?{class:'box'}:null),b.p));
+    else if(b.p!=null) body.appendChild(fill(el('p',b.box?{class:'box'}:(b.center?{class:'ctr'}:null)),b.p));
+    else if(b.photo!=null) body.appendChild(el('div',{class:'photo'},b.photo));
     else if(b.note!=null) body.appendChild(el('p',{class:'note'},b.note));
     else if(b.kv){var g=el('div',{class:'kv'});b.kv.forEach(function(r){var d=el('div');d.appendChild(el('span',null,r[1]+':'));var key=(lang==='en'&&r[3])?r[3]:r[0];var s=el('span');if(key==='_'){s.appendChild(el('span',{class:'blank'}))}else{fill(s,'{'+key+'}')}d.appendChild(s);g.appendChild(d)});body.appendChild(g)}
     else if(b.checks){var def=FD[b.checks],v=raw(b.checks),c=el('div',{class:'checks'});if(b.label)c.appendChild(el('b',null,b.label+':'));(def.opts||[]).forEach(function(o){c.appendChild(el('span',null,(o[0]===v?'☑ ':'☐ ')+(lang==='ar'?o[1]:o[2])))});body.appendChild(c)}
