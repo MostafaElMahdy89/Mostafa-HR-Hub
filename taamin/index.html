@@ -13,13 +13,14 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script src="../assets/companies.js"></script>
 <style>
+@font-face{font-family:"TFix";src:url("../assets/fonts/league-spartan-latin-wght-normal.woff2") format("woff2");font-weight:100 900;font-display:swap;unicode-range:U+0074}
 /* Layout: tool shell. Left/right split: data panel (settings, records) + live paper preview. Print renders only the paper pages. */
 :root{
   --bg:#F4F6FA; --surface:#FFFFFF; --ink:#0F1E36; --muted:#55607A; --line:#DCE2EC;
   --brand:#C2410C; --brand-ink:#FFFFFF; --brand-soft:#FCE8DC; --band:#12264A; --on-band:#FFFFFF;
   --ok:#1F7A4D; --ok-soft:#E1F3EA; --warn:#9A5B00; --warn-soft:#FBF0DB; --bad:#B42318; --bad-soft:#FDE8E7;
-  --display:"Readex Pro","IBM Plex Sans Arabic",system-ui,sans-serif;
-  --body:"IBM Plex Sans Arabic","Readex Pro","Segoe UI",Tahoma,system-ui,sans-serif;
+  --display:"TFix","Readex Pro","IBM Plex Sans Arabic",system-ui,sans-serif;
+  --body:"TFix","IBM Plex Sans Arabic","Readex Pro","Segoe UI",Tahoma,system-ui,sans-serif;
   --ink-print:#0B2A8A;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
@@ -102,11 +103,11 @@ td.num{font-variant-numeric:tabular-nums;direction:ltr;text-align:right}
 /* paper */
 .page{position:relative;width:612pt;height:1008pt;background:#fff;color:var(--ink-print);overflow:hidden;box-shadow:0 6px 24px -10px rgba(0,0,0,.35)}
 .page>img{position:absolute;inset:0;width:100%;height:100%}
-.page .t{position:absolute;height:15pt;display:flex;align-items:flex-end;justify-content:center;font:600 10.5pt/1 "IBM Plex Sans Arabic",Tahoma,sans-serif;white-space:nowrap;overflow:hidden;direction:rtl}
+.page .t{position:absolute;height:15pt;display:flex;align-items:flex-end;justify-content:center;font:600 10.5pt/1 "TFix","IBM Plex Sans Arabic",Tahoma,sans-serif;white-space:nowrap;overflow:hidden;direction:rtl}
 .page .t.c{justify-content:center}
 .page .t.sm{font-size:8.5pt}
 .page .t.ltr{direction:ltr;justify-content:flex-end}
-.page .d{position:absolute;display:grid;place-items:center;font:600 12pt/1 "IBM Plex Sans Arabic",Tahoma,sans-serif}
+.page .d{position:absolute;display:grid;place-items:center;font:600 12pt/1 "TFix","IBM Plex Sans Arabic",Tahoma,sans-serif}
 .page .ck{position:absolute;display:grid;place-items:center;font:700 13pt/1 Tahoma,sans-serif}
 
 #printArea{display:none}

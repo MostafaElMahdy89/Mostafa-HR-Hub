@@ -10,13 +10,14 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Darker+Grotesque:wght@500;600;700;800&family=Readex+Pro:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap">
 <style>
+@font-face{font-family:"TFix";src:url("assets/fonts/league-spartan-latin-wght-normal.woff2") format("woff2");font-weight:100 900;font-display:swap;unicode-range:U+0074}
 /* Layout: bilingual (AR rtl / EN ltr) single column. Asymmetric hero (thesis + portrait), proof strip, services, anonymized engagements, tools, training, timeline, contact band. */
 :root{
   --bg:#F4F6FA; --surface:#FFFFFF; --ink:#0F1E36; --muted:#55607A; --line:#DCE2EC;
   --brand:#C2410C; --brand-ink:#FFFFFF; --brand-soft:#FCE8DC; --gold:#9A5B00; --gold-soft:#FBF0DB;
   --band:#12264A; --on-band:#FFFFFF;
-  --display:"Readex Pro","IBM Plex Sans Arabic",system-ui,sans-serif;
-  --body:"IBM Plex Sans Arabic","Readex Pro","Segoe UI",Tahoma,system-ui,sans-serif;
+  --display:"TFix","Readex Pro","IBM Plex Sans Arabic",system-ui,sans-serif;
+  --body:"TFix","IBM Plex Sans Arabic","Readex Pro","Segoe UI",Tahoma,system-ui,sans-serif;
   --r:16px;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
@@ -40,10 +41,10 @@ html[lang="en"] body{line-height:1.65}
 html[lang="ar"] .en, html[lang="en"] .ar{display:none!important}
 .wrap{max-width:1140px;margin-inline:auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 h1,h2,h3{font-family:var(--display);line-height:1.25;text-wrap:balance;margin:0}
-html[lang="en"] h1,html[lang="en"] h2,html[lang="en"] h3,html[lang="en"] .proof b{font-family:"Bricolage Grotesque","Readex Pro",system-ui,sans-serif;font-optical-sizing:auto;letter-spacing:-.015em}
+html[lang="en"] h1,html[lang="en"] h2,html[lang="en"] h3,html[lang="en"] .proof b{font-family:"TFix","Bricolage Grotesque","Readex Pro",system-ui,sans-serif;font-optical-sizing:auto;letter-spacing:-.015em}
 html[lang="en"] .hero h1{font-size:clamp(2.3rem,5.2vw,4.4rem);font-weight:800;line-height:1.05;letter-spacing:-.025em}
-.brand b{font-family:"Darker Grotesque","Readex Pro",system-ui,sans-serif;font-weight:800;font-size:1.45rem;letter-spacing:.005em;line-height:1}
-html[lang="en"] .role,html[lang="en"] .portrait figcaption b,html[lang="en"] .kicker,html[lang="en"] .hook{font-family:"Darker Grotesque","Readex Pro",system-ui,sans-serif}
+.brand b{font-family:"TFix","Darker Grotesque","Readex Pro",system-ui,sans-serif;font-weight:800;font-size:1.45rem;letter-spacing:.005em;line-height:1}
+html[lang="en"] .role,html[lang="en"] .portrait figcaption b,html[lang="en"] .kicker,html[lang="en"] .hook{font-family:"TFix","Darker Grotesque","Readex Pro",system-ui,sans-serif}
 html[lang="en"] .role{font-weight:700;font-size:clamp(1.3rem,2.6vw,1.6rem);line-height:1.25}
 html[lang="en"] .portrait figcaption b{font-weight:800;font-size:1.3rem;line-height:1.1}
 html[lang="en"] .kicker{font-weight:800;font-size:1.05rem;letter-spacing:.06em}
@@ -67,7 +68,7 @@ nav a:hover{color:var(--ink);background:var(--brand-soft)}
 .ctl{display:flex;gap:8px;align-items:center}
 .icon-btn{min-width:40px;height:40px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;display:grid;place-items:center;font-family:var(--display);font-weight:600;font-size:.85rem;padding:0 10px}
 .icon-btn:hover{border-color:var(--brand)}
-@media (max-width:900px){nav{display:none}}
+@media (max-width:900px){.bar{flex-wrap:wrap;row-gap:6px}nav{order:3;flex-basis:100%;overflow-x:auto;scrollbar-width:none;margin-inline:-8px;padding-bottom:2px}nav::-webkit-scrollbar{display:none}nav a{white-space:nowrap;font-size:.92rem;padding:6px 10px}}
 
 /* hero */
 .hero{padding-block:56px 40px;display:grid;grid-template-columns:1.25fr .9fr;gap:48px;align-items:center}
