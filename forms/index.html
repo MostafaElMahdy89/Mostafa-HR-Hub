@@ -113,6 +113,11 @@ details[open].panel>summary h2::after{content:"▴"}
 /* ===== the document (print-faithful, fixed light colours) ===== */
 .doc{--c:#12264A;width:210mm;min-height:297mm;background:#fff;color:#111827;font-family:"TFix-Plex","IBM Plex Sans Arabic",Tahoma,Arial,sans-serif;font-size:10.5pt;line-height:1.75;padding:12mm 16mm 10mm;display:flex;flex-direction:column;box-shadow:0 6px 24px -10px rgba(0,0,0,.35)}
 .doc[dir="ltr"]{font-family:"TFix-Plex","IBM Plex Sans Arabic",Arial,sans-serif}
+.dt{width:100%;height:100%;border-collapse:collapse;flex:1}
+.dt>thead>tr>td,.dt>tfoot>tr>td{padding:0}
+.dt td.dmain{vertical-align:top;padding:0}
+.dt>tfoot>tr>td{vertical-align:bottom}
+.attr{text-align:center;font-size:7pt;color:#9ca3af;margin-top:1.5mm;direction:ltr;unicode-bidi:plaintext}
 .lh{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:4mm;border-bottom:2.5pt solid var(--c)}
 .lh .names b{display:block;font-size:14pt;color:var(--c);font-family:"TFix-Readex","Readex Pro","IBM Plex Sans Arabic",sans-serif;line-height:1.3}
 .lh .names span{font-size:9pt;color:#4b5563}
@@ -164,11 +169,13 @@ ol.cl li{text-align:justify}
 @media (max-width:760px){.cat-list{position:static;max-height:42vh}.preview{position:static}.paper-frame{max-height:none}}
 #printArea{display:none}
 @media print{
-  @page{size:A4;margin:0}
+  @page{size:A4;margin:12mm 0 10mm}
   body{background:#fff;padding:0}
   header.top,main,.toast{display:none!important}
   #printArea{display:block}
-  #printArea .doc{box-shadow:none}
+  #printArea .doc{box-shadow:none;min-height:0;padding:0 16mm}
+  #printArea .dt{height:auto}
+  #printArea .dt>thead>tr>td{padding-bottom:3mm}
   #printArea .owrap{gap:0;width:auto}
   #printArea .opage{zoom:.972;box-shadow:none;margin:0 auto;break-after:page;page-break-after:always}
   #printArea .opage:last-child{break-after:auto;page-break-after:auto}
@@ -233,6 +240,7 @@ ol.cl li{text-align:justify}
     </div>
   </div>
 </main>
+<p style="text-align:center;font-size:.8rem;color:var(--muted);padding:8px 16px 24px">© 2026 Mostafa El Mahdy · جميع الحقوق محفوظة · <a href="../terms.html" style="color:inherit">شروط الاستخدام</a></p>
 <div id="printArea"></div>
 <div class="toast" id="toast" hidden></div>
 
@@ -311,13 +319,18 @@ function buildDoc(form){
   var sub=lang==='ar'?(co.est_name_en||''):(co.est_name||''); if(sub) names.appendChild(el('span',null,sub));
   lh.appendChild(names);
   if(co.logo){lh.appendChild(el('img',{src:co.logo,alt:''}))}else{lh.appendChild(el('div',{class:'ph'},'LOGO'))}
-  doc.appendChild(lh);
+  /* table layout: thead/tfoot repeat on every printed page */
+  var tbl=el('table',{class:'dt'}),th=el('thead'),tr0=el('tr'),td0=el('td');td0.appendChild(lh);tr0.appendChild(td0);th.appendChild(tr0);tbl.appendChild(th);
+  var tf=el('tfoot'),tr2=el('tr'),td2=el('td');tr2.appendChild(td2);tf.appendChild(tr2);tbl.appendChild(tf);
+  var tb0=el('tbody'),tr1=el('tr'),main=el('td',{class:'dmain'});tr1.appendChild(main);tb0.appendChild(tr1);tbl.appendChild(tb0);
+  doc.appendChild(tbl);
+  var docMain=main;
   var meta=el('div',{class:'meta'});
   meta.appendChild(fill(el('span'),(lang==='ar'?'الرقم: ':'Ref: ')+'{ref_no}'));
   meta.appendChild(fill(el('span'),(lang==='ar'?'التاريخ: ':'Date: ')+'{doc_date}'));
-  doc.appendChild(meta);
+  docMain.appendChild(meta);
   var hasSubj=(form[lang]||[]).some(function(b){return b.subj});
-  if(!hasSubj){var tt=el('div',{class:'dtitle'});tt.appendChild(el('span',null,T(form.t)));doc.appendChild(tt)}
+  if(!hasSubj){var tt=el('div',{class:'dtitle'});tt.appendChild(el('span',null,T(form.t)));docMain.appendChild(tt)}
   var body=el('div',{class:'body'});
   (form[lang]||[]).forEach(function(b){
     if(b.when&&raw(b.when[0])!==b.when[1])return;
@@ -343,11 +356,12 @@ function buildDoc(form){
       if(b.stamp)sg.appendChild(el('div',{class:'stamp'},lang==='ar'?'ختم الشركة':'Company stamp'));
       body.appendChild(sg)}
   });
-  doc.appendChild(body);
-  if(form.ref)doc.appendChild(el('p',{class:'lref'},(lang==='ar'?'المرجع: ':'Reference: ')+T(form.ref)));
+  docMain.appendChild(body);
+  if(form.ref)docMain.appendChild(el('p',{class:'lref'},(lang==='ar'?'المرجع: ':'Reference: ')+T(form.ref)));
   var ft=el('div',{class:'foot'});
   [lang==='ar'?co.est_address:(co.est_address_en||co.est_address),co.phone&&((lang==='ar'?'ت: ':'Tel: ')+co.phone),co.email,co.cr_no&&((lang==='ar'?'س.ت: ':'CR: ')+co.cr_no),co.tax_no&&((lang==='ar'?'ب.ض: ':'Tax: ')+co.tax_no)].forEach(function(x){if(x)ft.appendChild(el('span',null,x))});
-  doc.appendChild(ft);
+  td2.appendChild(ft);
+  td2.appendChild(el('div',{class:'attr'},(lang==='ar'?'تم التجهيز عبر ':'Prepared with ')+'Mostafa HR Hub · mostafaelmahdy89.github.io/Mostafa-HR-Hub'));
   return doc;
 }
 

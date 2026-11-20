@@ -1,0 +1,17 @@
+Copyright (c) 2026 Mostafa El Mahdy. All rights reserved.
+
+This repository and the website it publishes (Mostafa HR Hub), including the
+code, design, text and form wording, are proprietary. No licence is granted to
+copy, modify, republish, distribute, sell or offer them as a service, in whole
+or in part, without prior written permission from the copyright holder.
+
+Using the published tools to prepare and print documents for your own company
+or clients is permitted under the terms at terms.html.
+
+Third-party components keep their own licences:
+- Font files in assets/fonts/ are derived from League Spartan and are licensed
+  under the SIL Open Font License 1.1 (see assets/fonts/LICENSE-LeagueSpartan-OFL.txt).
+- Official social insurance and Ministry of Labour forms belong to their issuing
+  authorities.
+
+Contact: moustafa.mahdy@outlook.com
