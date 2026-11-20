@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>مكتبة نماذج HR</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="35 نموذجًا وخطابًا للموارد البشرية في مصر، بهوية شركتك وبياناتها، بالعربي أو الإنجليزي، جاهزة للطباعة. يعمل محليًا على جهازك.">
+<meta name="description" content="36 نموذجًا وخطابًا للموارد البشرية في مصر، بهوية شركتك وبياناتها، بالعربي أو الإنجليزي، جاهزة للطباعة. يعمل محليًا على جهازك.">
 <link rel="icon" href="../logo-mark.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -133,6 +133,12 @@ ol.cl li{text-align:justify}
 .sg .ln{border-bottom:1px solid #6b7280;height:7mm;display:flex;align-items:flex-end;font-weight:600}
 .stamp{width:26mm;height:26mm;border:1px dashed #9ca3af;border-radius:50%;display:grid;place-items:center;color:#9ca3af;font-size:8pt;margin-inline-start:auto}
 .lref{margin:5mm 0 0;font-size:8pt;color:#4b5563;border-inline-start:2pt solid var(--c);padding-inline-start:2mm}
+.owrap{display:flex;flex-direction:column;gap:14px;width:612pt}
+.opage{position:relative;background:#fff;overflow:hidden;box-shadow:0 6px 24px -10px rgba(0,0,0,.35)}
+.opage>img{position:absolute;inset:0;width:100%;height:100%}
+.opage .t{position:absolute;height:14pt;display:flex;align-items:flex-end;justify-content:center;font:600 10.5pt/1 "IBM Plex Sans Arabic",Tahoma,sans-serif;color:#0B2A8A;white-space:nowrap;overflow:hidden;direction:rtl}
+.opage .t.sm{font-size:8.5pt}
+.opage .t.ltr{direction:ltr}
 .foot{margin-top:6mm;padding-top:2mm;border-top:1px solid color-mix(in srgb,var(--c) 35%,#fff);font-size:8pt;color:#4b5563;display:flex;flex-wrap:wrap;gap:1mm 5mm;justify-content:center}
 
 #printArea{display:none}
@@ -142,6 +148,9 @@ ol.cl li{text-align:justify}
   header.top,main,.toast{display:none!important}
   #printArea{display:block}
   #printArea .doc{box-shadow:none}
+  #printArea .owrap{gap:0;width:auto}
+  #printArea .opage{zoom:.972;box-shadow:none;margin:0 auto;break-after:page;page-break-after:always}
+  #printArea .opage:last-child{break-after:auto;page-break-after:auto}
 }
 .toast{position:fixed;bottom:calc(16px + env(safe-area-inset-bottom,0px));inset-inline-start:max(16px,env(safe-area-inset-left,0px));background:var(--band);color:var(--on-band);padding:10px 16px;border-radius:12px;font-size:.9rem}
 </style>
@@ -149,7 +158,7 @@ ol.cl li{text-align:justify}
 <body>
 <header class="top wrap">
   <div class="row">
-    <a class="home" href="../"><img src="../logo-mark.png" alt="" width="40" height="20"><span><b>مكتبة نماذج HR</b><small>Mostafa HR Hub · 35 نموذجًا وخطابًا</small></span></a>
+    <a class="home" href="../"><img src="../logo-mark.png" alt="" width="40" height="20"><span><b>مكتبة نماذج HR</b><small>Mostafa HR Hub · 36 نموذجًا وخطابًا</small></span></a>
     <div style="display:flex;gap:10px;align-items:center">
       <span class="local">يعمل محليًا على جهازك</span>
       <button class="icon-btn" id="themeBtn" type="button" aria-label="الوضع الليلي">◐</button>
@@ -253,7 +262,25 @@ function fill(node,text){ // replaces {k}; empty → dotted blank
 
 /* ---- render document ---- */
 function T(pair){return lang==='ar'?pair[0]:pair[1]}
+var WD=['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
+var SHORT={fixed:'محدد',open:'غير محدد',part:'جزئي'};
+function ofmt(f){
+  var v=raw(f.k);
+  if(f.part){var m=String(v).match(/^(\d{4})-(\d{2})-(\d{2})$/);if(!m)return '';if(f.part==='d')return m[3];if(f.part==='m')return m[2];if(f.part==='y')return m[1];return WD[new Date(+m[1],+m[2]-1,+m[3]).getDay()]}
+  if(f.short)return SHORT[v]||'';
+  var keep=lang;lang='ar';var o=fmt(f.k);lang=keep;return o||'';
+}
+function buildOfficial(form){
+  var w=el('div',{class:'owrap'});
+  form.pages.forEach(function(pg){
+    var p=el('div',{class:'opage'});p.style.width=pg.w+'pt';p.style.height=pg.h+'pt';p.appendChild(el('img',{src:pg.bg,alt:''}));
+    pg.fields.forEach(function(f){var v=ofmt(f);if(!v)return;var t=el('div',{class:'t'+(f.small?' sm':'')+(f.ltr?' ltr':'')},v);t.style.right=(pg.w-f.r)+'pt';t.style.left=f.l+'pt';t.style.top=(f.t-3)+'pt';p.appendChild(t)});
+    w.appendChild(p);
+  });
+  return w;
+}
 function buildDoc(form){
+  if(form.official)return buildOfficial(form);
   var doc=el('div',{class:'doc',dir:lang==='ar'?'rtl':'ltr',lang:lang});
   doc.style.setProperty('--c',co.color||'#12264A');
   var lh=el('div',{class:'lh'});var names=el('div',{class:'names'});
@@ -314,7 +341,8 @@ var TIPS={
  inv_minutes:'المحضر يودع في ملف العامل (م 141). المحقق لا يقل مستواه الوظيفي عن العامل (م 142).',
  penalty:'الجزاء خلال 30 يومًا من انتهاء التحقيق (م 138)، والقرار مسبَّب (م 141). الخصم لا يزيد على 5 أيام عن المخالفة الواحدة ولا أكثر من 5 أيام في الشهر (م 143). الفصل للمحكمة العمالية فقط، ومدير المنشأة يوقّع الإنذار والخصم حتى 3 أيام (م 148).',
  absence_warning:'يُعتبر العامل مستقيلًا إذا تغيب دون مبرر أكثر من 10 أيام متتالية أو 20 يومًا متقطعة في السنة، بشرط إنذاره بخطاب موصى عليه بعلم الوصول بعد 5 أيام متتالية أو 10 متقطعة (م 166).',
- resignation:'الاستقالة كتابية وموقعة ومعتمدة من الجهة الإدارية المختصة، ولا تنتهي الخدمة إلا بقرار قبولها خلال 10 أيام، وإلا اعتُبرت مقبولة. وللعامل العدول عنها خلال 10 أيام من إخطاره بالقبول (م 167).',
+ resign_official:'الاستقالة كتابية وموقعة ومعتمدة من الجهة الإدارية المختصة، ولا تنتهي الخدمة إلا بقرار قبولها خلال 10 أيام، وإلا اعتُبرت مقبولة. وللعامل العدول عنها خلال 10 أيام من إخطاره بالقبول (م 167).',
+ mutual_termination:'البند الخامس في النموذج يعتبر توقيع العامل مخالصة وإبراء، والبند الرابع يُلزم صاحب العمل بتسوية كل المستحقات قبل التوقيع. راجع المادة (6) بشأن بطلان الإبراء خلال سريان العقد أو 3 أشهر من انتهائه.',
  settlement:'تحذير: يقع باطلًا أي إبراء من حقوق العامل خلال سريان العقد أو خلال 3 أشهر من انتهائه (م 6). إقرار «عدم وجود مستحقات أخرى» اختياري وقد لا يُعتد به خلال هذه المدة.',
  experience_cert:'تُعطى دون مقابل خلال 15 يومًا من طلبها، وتتضمن تاريخي الالتحاق والانتهاء ونوع العمل والمزايا. الأجر وسبب الانتهاء يُذكران بناءً على طلب العامل فقط (م 175).',
  hr_letter:'للعامل الحق في شهادة بخبرته دون مقابل أثناء سريان العقد (م 175).',
@@ -347,6 +375,7 @@ function renderFields(){
   var f=form();$('#formTitle').textContent=f.t[0]+' · '+f.t[1];
   $('#formHint').textContent=CATS[f.cat][0]+' — البيانات المشتركة (اسم الموظف، الوظيفة…) بتفضل محفوظة وإنت بتنقل بين النماذج.';
   if(TIPS[f.id])$('#formHint').textContent=TIPS[f.id];
+  if(f.official)$('#formHint').textContent=(TIPS[f.id]?TIPS[f.id]+' ':'')+'نموذج رسمي بالعربي فقط: البيانات تُطبع على النموذج الأصلي، والتوقيعات والاعتماد والخاتم بخط اليد.';
   var g=$('#fGrid');g.innerHTML='';
   var keys=f.f.slice(); if(lang==='en'){['emp_name','job','dept'].forEach(function(k){if(keys.indexOf(k)>-1&&keys.indexOf(k+'_en')<0)keys.splice(keys.indexOf(k)+1,0,k+'_en')})}
   if(keys.indexOf('doc_date')<0)keys.push('doc_date'); if(f.letter&&keys.indexOf('ref_no')<0)keys.push('ref_no');

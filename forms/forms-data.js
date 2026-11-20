@@ -95,6 +95,11 @@
   F('absence_kind', 'نوع الغياب', 'Absence type', 'select', { opts: [['consecutive', 'أيام متتالية', 'Consecutive days'], ['intermittent', 'أيام متقطعة', 'Separate days']] });
   F('penalty_detail', 'تفاصيل الجزاء (مثل عدد أيام الخصم)', 'Penalty details (e.g. days deducted)');
   F('end_reason', 'سبب انتهاء علاقة العمل', 'Reason for ending employment');
+  F('res_to', 'موجّه إلى السيد/', 'Addressed to (name)');
+  F('res_to_title', 'مدير / (الإدارة أو الشركة)', 'Manager of');
+  F('res_reason', 'سبب الاستقالة (ظروف خاصة / دواعي السفر / نقل محل الإقامة / …)', 'Reason for resignation');
+  F('emp_phone', 'تليفون الموظف', 'Employee phone', 'tel');
+  F('agree_date', 'تاريخ الاتفاق', 'Agreement date', 'date');
   F('absence_from', 'تاريخ بدء الانقطاع', 'Absent since', 'date');
   F('absence_days', 'عدد أيام الانقطاع', 'Days of absence', 'number');
     F('review_period', 'فترة التقييم', 'Review period');
@@ -399,20 +404,30 @@
         { h: 'Post-training evaluation' }, { grid: ['Criterion', '1', '2', '3', '4', '5'], rows: [['Relevance to the job'], ['Trainer quality'], ['Applicability'], ['Overall']] }, { p: 'What will be applied on the job:' }, { lines: 2 }] },
 
     /* ===== Separation ===== */
-    { id: 'resignation', cat: 'exit', t: ['استقالة', 'Resignation Letter'], letter: true,
-      ref: ['قانون العمل رقم 14 لسنة 2025: م (167) الاستقالة وقبولها والعدول عنها.', 'Labour Law No. 14 of 2025: Art. 167 (resignation, acceptance and withdrawal).'],
-      f: ['emp_name', 'nid', 'job', 'dept', 'last_day', 'doc_date'],
-      ar: [{ to: 'السادة/ {est_name}\nإدارة الموارد البشرية' }, { subj: 'استقالة' }, { p: 'أتقدم أنا {emp_name}، رقم قومي {nid}، الوظيفة {job} بإدارة {dept}، باستقالتي من العمل، على أن يكون آخر يوم عمل لي {last_day}، وألتزم بالاستمرار في العمل حتى البت في الاستقالة، وبتسليم ما بعهدتي وإنهاء إجراءات إخلاء الطرف.' }, { p: 'وتفضلوا بقبول فائق الاحترام،' },
-        { sign: [['مقدم الاستقالة', 'Employee'], ['استلام الموارد البشرية (التاريخ)', 'Received by HR (date)']] },
-        { h: 'اعتماد الجهة الإدارية المختصة' }, { kv: [['_', 'الجهة'], ['_', 'رقم وتاريخ الاعتماد']] },
-        { h: 'قرار صاحب العمل' }, { checksStatic: ['قبول الاستقالة', 'رفض الاستقالة'] }, { kv: [['_', 'تاريخ القرار'], ['_', 'تاريخ إخطار العامل']] },
-        { note: 'تُقدَّم الاستقالة كتابة موقعة من العامل أو وكيله الخاص ومعتمدة من الجهة الإدارية المختصة. لا تنتهي الخدمة إلا بقرار قبولها، ويُبت فيها خلال عشرة أيام من تقديمها وإلا اعتُبرت مقبولة، وللعامل العدول عنها كتابةً خلال عشرة أيام من إخطاره بالقبول (م 167).' }],
-      en: [{ to: 'To: {est_name_en}\nHuman Resources' }, { subj: 'Resignation' }, { p: 'I, {emp_name_en}, national ID {nid}, {job_en} in the {dept_en} department, hereby resign from my position, with {last_day} as my last working day. I will continue working until a decision is made on my resignation, hand over all items in my custody and complete the clearance process.' }, { p: 'Sincerely,' },
-        { sign: [['مقدم الاستقالة', 'Employee'], ['استلام الموارد البشرية (التاريخ)', 'Received by HR (date)']] },
-        { h: 'Approval of the competent administrative authority' }, { kv: [['_', 'Authority'], ['_', 'Approval no. and date']] },
-        { h: 'Employer decision' }, { checksStatic: ['Resignation accepted', 'Resignation rejected'] }, { kv: [['_', 'Decision date'], ['_', 'Date employee notified']] },
-        { note: 'The resignation must be in writing, signed by the employee or a special agent, and approved by the competent administrative authority. Employment ends only by a decision accepting it; it is deemed accepted if not decided within ten days, and the employee may withdraw it in writing within ten days of being notified of acceptance (Art. 167).' }] },
-
+    { id: 'resign_official', cat: 'exit', official: true, t: ['طلب استقالة (نموذج وزارة العمل)', 'Resignation Request (Ministry of Labour form)'],
+      ref: ['قانون العمل رقم 14 لسنة 2025: م (167) — يُعتمد من الجهة الإدارية المختصة.', 'Labour Law No. 14 of 2025: Art. 167.'],
+      f: ['res_to', 'res_to_title', 'emp_name', 'job', 'contract_type', 'res_reason', 'last_day', 'nid', 'emp_address', 'emp_phone'],
+      pages: [{ bg: 'assets/resign-1.webp', w: 612, h: 792, fields: [
+        { k: 'res_to', r: 431, l: 95, t: 190 }, { k: 'res_to_title', r: 341, l: 83, t: 220 },
+        { k: 'emp_name', r: 398, l: 234, t: 250 }, { k: 'job', r: 496, l: 332, t: 280 }, { k: 'contract_type', r: 271, l: 232, t: 280, small: true, short: true },
+        { k: 'res_reason', r: 490, l: 405, t: 309, small: true }, { k: 'last_day', r: 388, l: 237, t: 369 },
+        { k: 'emp_name', r: 250, l: 89, t: 500 }, { k: 'job', r: 253, l: 93, t: 520 }, { k: 'nid', r: 233, l: 93, t: 540, ltr: true },
+        { k: 'emp_address', r: 255, l: 91, t: 560, small: true }, { k: 'emp_phone', r: 231, l: 92, t: 580, ltr: true }] }] },
+    { id: 'mutual_termination', cat: 'exit', official: true, t: ['إنهاء علاقة العمل بالتوافق (نموذج وزارة العمل)', 'Termination by Mutual Agreement (Ministry of Labour form)'],
+      ref: ['نموذج وزارة العمل — قانون العمل رقم 14 لسنة 2025.', 'Ministry of Labour form — Labour Law No. 14 of 2025.'],
+      f: ['agree_date', 'emp_name', 'job', 'contract_type', 'hire_date', 'last_day', 'nid', 'emp_address', 'emp_phone'],
+      pages: [
+        { bg: 'assets/mutual-1.webp', w: 612, h: 792, fields: [
+          { k: 'agree_date', part: 'wd', r: 485, l: 433, t: 215 }, { k: 'agree_date', part: 'd', r: 396, l: 361, t: 215 }, { k: 'agree_date', part: 'm', r: 356, l: 311, t: 215 }, { k: 'agree_date', part: 'y', r: 306, l: 250, t: 215 },
+          { k: 'applicant_name', r: 418, l: 254, t: 275 }, { k: 'est_name', r: 388, l: 88, t: 305 },
+          { k: 'emp_name', r: 414, l: 239, t: 334 }, { k: 'job', r: 429, l: 79, t: 364 },
+          { k: 'job', r: 282, l: 72, t: 462 }, { k: 'contract_type', r: 475, l: 381, t: 492 },
+          { k: 'hire_date', part: 'd', r: 155, l: 138, t: 492 }, { k: 'hire_date', part: 'm', r: 133, l: 108, t: 492 }, { k: 'hire_date', part: 'y', r: 104, l: 72, t: 492 }] },
+        { bg: 'assets/mutual-2.webp', w: 612, h: 792, fields: [
+          { k: 'last_day', part: 'wd', r: 240, l: 200, t: 301 }, { k: 'last_day', part: 'd', r: 168, l: 146, t: 301 }, { k: 'last_day', part: 'm', r: 138, l: 106, t: 301 }, { k: 'last_day', part: 'y', r: 100, l: 72, t: 301 }] },
+        { bg: 'assets/mutual-3.webp', w: 612, h: 792, fields: [
+          { k: 'applicant_name', r: 500, l: 340, t: 544 }, { k: 'applicant_role', r: 485, l: 341, t: 563 }, { k: 'est_name', r: 458, l: 343, t: 583, small: true }, { k: 'est_address', r: 460, l: 342, t: 603, small: true },
+          { k: 'emp_name', r: 250, l: 89, t: 544 }, { k: 'job', r: 251, l: 90, t: 563 }, { k: 'nid', r: 230, l: 90, t: 583, ltr: true }, { k: 'emp_address', r: 255, l: 91, t: 603, small: true }, { k: 'emp_phone', r: 229, l: 89, t: 623, ltr: true }] }] },
     { id: 'clearance', cat: 'exit', t: ['إخلاء طرف', 'Clearance Form'],
       ref: ['قانون العمل رقم 14 لسنة 2025: م (175) رد أوراق العامل وما يفيد إخلاء طرفه عند انتهاء العلاقة.', 'Labour Law No. 14 of 2025: Art. 175 (return of documents and clearance on request).'],
       f: ['emp_name', 'job', 'dept', 'last_day'],
