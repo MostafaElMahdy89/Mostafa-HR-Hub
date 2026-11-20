@@ -62,7 +62,7 @@ header.top{background:var(--band);color:var(--on-band)}
 
 main{max-width:1600px;margin-inline:auto;display:grid;grid-template-columns:260px minmax(0,1fr) minmax(0,1.1fr);gap:16px;padding-block:16px;align-items:start}
 @media (max-width:1250px){main{grid-template-columns:240px minmax(0,1fr)}.preview{grid-column:1/-1}}
-@media (max-width:760px){main{grid-template-columns:1fr}}
+@media (max-width:760px){main{grid-template-columns:minmax(0,1fr)}.cat-list{position:static;max-height:38vh}.preview{position:static}.paper-frame{max-height:none}}
 .panel{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px;min-width:0}
 .stack{display:flex;flex-direction:column;gap:14px;min-width:0}
 .panel h2{font-size:1rem;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
@@ -101,12 +101,12 @@ details[open].panel>summary h2::after{content:"▴"}
 .sample-note{background:var(--brand-soft);color:var(--brand);border-radius:10px;padding:8px 12px;font-size:.85rem;margin-top:10px}
 
 /* preview */
-.preview{position:sticky;top:12px}
+.preview{position:sticky;top:12px;min-width:0}
 .pv-head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
 .seg{display:flex;gap:4px;background:var(--bg);border:1px solid var(--line);padding:3px;border-radius:999px}
 .seg button{border:0;background:transparent;padding:4px 14px;border-radius:999px;cursor:pointer;font-size:.85rem}
 .seg button[aria-pressed="true"]{background:var(--band);color:var(--on-band)}
-.paper-frame{background:#C9CFDA;border-radius:12px;padding:14px;overflow:auto;max-height:calc(100vh - 150px)}
+.paper-frame{background:#C9CFDA;border-radius:12px;padding:14px;overflow:hidden auto;max-height:calc(100vh - 150px)}
 .paper-scale{transform-origin:top right}
 [dir="ltr"] .paper-scale{transform-origin:top left}
 
@@ -161,6 +161,7 @@ ol.cl li{text-align:justify}
 .opage .t.ltr{direction:ltr}
 .foot{margin-top:6mm;padding-top:2mm;border-top:1px solid color-mix(in srgb,var(--c) 35%,#fff);font-size:8pt;color:#4b5563;display:flex;flex-wrap:wrap;gap:1mm 5mm;justify-content:center}
 
+@media (max-width:760px){.cat-list{position:static;max-height:42vh}.preview{position:static}.paper-frame{max-height:none}}
 #printArea{display:none}
 @media print{
   @page{size:A4;margin:0}
@@ -376,7 +377,7 @@ function renderCats(){
   Object.keys(CATS).forEach(function(ck){
     var items=FORMS.filter(function(f){return f.cat===ck&&(!q||(f.t[0]+' '+f.t[1]).toLowerCase().indexOf(q)>-1)});
     if(!items.length)return;var c=el('div',{class:'cat'});c.appendChild(el('h3',null,CATS[ck][0]));
-    items.forEach(function(f){n=FORMS.indexOf(f)+1;var b=el('button',{type:'button','aria-current':String(f.id===cur)});b.appendChild(el('span',{class:'n'},String(n)));b.appendChild(el('span',null,f.t[0]));b.addEventListener('click',function(){cur=f.id;wr('mhh-forms-cur',cur);renderCats();renderFields();renderPreview()});c.appendChild(b)});
+    items.forEach(function(f){n=FORMS.indexOf(f)+1;var b=el('button',{type:'button','aria-current':String(f.id===cur)});b.appendChild(el('span',{class:'n'},String(n)));b.appendChild(el('span',null,f.t[0]));b.addEventListener('click',function(){cur=f.id;wr('mhh-forms-cur',cur);renderCats();renderFields();renderPreview();if(window.innerWidth<=760){var t=document.getElementById('formTitle');if(t)t.scrollIntoView({behavior:'smooth',block:'start'})}});c.appendChild(b)});
     box.appendChild(c);
   });
   if(!box.children.length)box.appendChild(el('p',{class:'hint'},'مفيش نموذج بالاسم ده.'));
