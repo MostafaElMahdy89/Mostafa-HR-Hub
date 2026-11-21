@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>الباحث القانوني · Mostafa HR Hub</title>
+<meta name="description" content="ابحث في نص قانون العمل المصري رقم 14 لسنة 2025 مادة بمادة، مع صورة الصفحة الأصلية من الجريدة الرسمية.">
+<link rel="icon" href="../logo-mark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap">
+<style>
+@font-face{font-family:"TFix-Plex";src:url("../assets/fonts/tfix-plex-400.woff2") format("woff2");font-weight:400;font-display:swap;unicode-range:U+0074}
+@font-face{font-family:"TFix-Plex";src:url("../assets/fonts/tfix-plex-500.woff2") format("woff2");font-weight:500;font-display:swap;unicode-range:U+0074}
+@font-face{font-family:"TFix-Plex";src:url("../assets/fonts/tfix-plex-600.woff2") format("woff2");font-weight:600;font-display:swap;unicode-range:U+0074}
+@font-face{font-family:"TFix-Plex";src:url("../assets/fonts/tfix-plex-700.woff2") format("woff2");font-weight:700;font-display:swap;unicode-range:U+0074}
+@font-face{font-family:"TFix-Readex";src:url("../assets/fonts/tfix-readex-500.woff2") format("woff2");font-weight:500;font-display:swap;unicode-range:U+0074}
+@font-face{font-family:"TFix-Readex";src:url("../assets/fonts/tfix-readex-600.woff2") format("woff2");font-weight:600;font-display:swap;unicode-range:U+0074}
+@font-face{font-family:"TFix-Readex";src:url("../assets/fonts/tfix-readex-700.woff2") format("woff2");font-weight:700;font-display:swap;unicode-range:U+0074}
+/* Layout: search-first legal reference. Header band, sticky search bar, topic chips, results / browse list, page-image viewer overlay. */
+:root{
+  --bg:#F4F6FA; --surface:#FFFFFF; --ink:#0F1E36; --muted:#55607A; --line:#DCE2EC;
+  --brand:#C2410C; --brand-ink:#FFFFFF; --brand-soft:#FCE8DC; --band:#12264A; --on-band:#FFFFFF; --mark:#FFE9A8;
+  --display:"TFix-Readex","Readex Pro","IBM Plex Sans Arabic",system-ui,sans-serif;
+  --body:"TFix-Plex","IBM Plex Sans Arabic","Readex Pro","Segoe UI",Tahoma,system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0B1628; --surface:#12223A; --ink:#E8ECF4; --muted:#A2AEC4; --line:#22344F;
+  --brand:#F07A3A; --brand-ink:#1A0D04; --brand-soft:#3A2416; --band:#183058; --on-band:#FFFFFF; --mark:#5A4410; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0B1628; --surface:#12223A; --ink:#E8ECF4; --muted:#A2AEC4; --line:#22344F;
+  --brand:#F07A3A; --brand-ink:#1A0D04; --brand-soft:#3A2416; --band:#183058; --on-band:#FFFFFF; --mark:#5A4410; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0}
+html{scroll-padding-top:150px}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.85;padding-block:env(safe-area-inset-top,0px) env(safe-area-inset-bottom,0px)}
+h1,h2,h3{font-family:var(--display);margin:0;line-height:1.3}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--brand);outline-offset:2px;border-radius:6px}
+.wrap{max-width:980px;margin-inline:auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+
+header.top{background:var(--band);color:var(--on-band)}
+.top .row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:14px;flex-wrap:wrap}
+.top a.home{display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit}
+.top a.home img{width:40px;height:auto}
+.top b{font-family:var(--display);font-size:1.1rem}
+.top small{display:block;opacity:.75;font-size:.78rem}
+.tabs{display:flex;gap:6px;background:color-mix(in srgb,var(--on-band) 10%,transparent);padding:4px;border-radius:999px;flex-wrap:wrap}
+.tabs button{border:0;background:transparent;color:var(--on-band);padding:7px 16px;border-radius:999px;cursor:pointer;font-weight:600;font-size:.92rem}
+.tabs button[aria-selected="true"]{background:var(--brand);color:var(--brand-ink)}
+.tabs button:disabled{opacity:.55;cursor:not-allowed}
+.icon-btn{height:36px;min-width:36px;border-radius:999px;border:1px solid color-mix(in srgb,var(--on-band) 30%,transparent);background:transparent;color:var(--on-band);cursor:pointer}
+
+.searchbar{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding-block:14px}
+.sbox{display:flex;gap:10px;align-items:center;background:var(--surface);border:1.5px solid var(--line);border-radius:16px;padding:6px 8px 6px 14px}
+.sbox:focus-within{border-color:var(--brand)}
+.sbox svg{flex:none;color:var(--muted)}
+.sbox input{flex:1;border:0;background:transparent;font-size:1.05rem;padding:8px 4px;min-width:0;outline:none}
+.sbox button{border:0;background:var(--bg);border-radius:10px;padding:6px 12px;cursor:pointer;color:var(--muted);font-size:.85rem}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.chip{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:5px 13px;font-size:.88rem;cursor:pointer;color:var(--ink)}
+.chip:hover{border-color:var(--brand);color:var(--brand)}
+.status{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-top:10px;color:var(--muted);font-size:.86rem}
+.status select{border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:4px 8px;max-width:100%}
+
+main{padding-block:20px 40px}
+.src{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px 16px;font-size:.86rem;color:var(--muted);margin-bottom:18px;display:flex;gap:10px;align-items:flex-start}
+.src b{color:var(--ink)}
+.list{display:flex;flex-direction:column;gap:12px}
+.art{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px 20px;min-width:0}
+.art:target{border-color:var(--brand);box-shadow:0 0 0 3px var(--brand-soft)}
+.ah{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
+.ah h3{font-size:1.12rem;color:var(--brand)}
+.crumb{font-size:.8rem;color:var(--muted)}
+.art p{margin:8px 0 0;text-align:justify}
+.art p.li{padding-inline-start:14px}
+.art mark{background:var(--mark);color:inherit;border-radius:3px;padding:0 1px}
+.art a.xref{color:var(--brand);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.btn{display:inline-flex;align-items:center;gap:6px;border:1.5px solid var(--line);background:transparent;color:var(--ink);padding:5px 12px;border-radius:999px;font-weight:600;cursor:pointer;font-size:.82rem}
+.btn:hover{border-color:var(--brand);color:var(--brand)}
+.more{color:var(--muted);font-size:.86rem;margin-top:6px}
+.empty{text-align:center;color:var(--muted);padding:40px 10px}
+.toc{display:flex;flex-direction:column;gap:14px}
+.toc h2{font-size:1.05rem}
+.toc .part{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px 18px}
+.toc .part>button{all:unset;cursor:pointer;display:flex;justify-content:space-between;gap:10px;width:100%;font-family:var(--display);font-weight:600}
+.toc .part>button span{color:var(--muted);font-weight:500;font-family:var(--body);font-size:.85rem;white-space:nowrap}
+.toc ul{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-direction:column;gap:4px}
+.toc li button{all:unset;cursor:pointer;display:flex;justify-content:space-between;gap:10px;width:100%;padding:6px 10px;border-radius:10px;font-size:.92rem}
+.toc li button:hover{background:var(--bg);color:var(--brand)}
+.toc li button span{color:var(--muted);font-size:.8rem;white-space:nowrap}
+.book{color:var(--muted);font-size:.85rem;font-weight:600;margin:6px 2px -4px}
+
+.viewer{position:fixed;inset:0;z-index:20;background:rgba(8,16,30,.82);display:flex;flex-direction:column;padding:calc(10px + env(safe-area-inset-top,0px)) max(10px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(10px,env(safe-area-inset-left,0px))}
+.vbar{display:flex;justify-content:space-between;align-items:center;gap:10px;color:#fff;padding:4px 6px 10px;flex-wrap:wrap}
+.vbar .btn{color:#fff;border-color:rgba(255,255,255,.35)}
+.vimg{flex:1;overflow:auto;display:flex;justify-content:center;align-items:flex-start;border-radius:12px}
+.vimg img{max-width:min(100%,900px);height:auto;background:#fff;border-radius:8px}
+footer{color:var(--muted);font-size:.8rem;text-align:center;padding:10px 16px 28px}
+footer a{color:inherit}
+.toast{position:fixed;bottom:calc(16px + env(safe-area-inset-bottom,0px));inset-inline-start:max(16px,env(safe-area-inset-left,0px));background:var(--band);color:var(--on-band);padding:10px 16px;border-radius:12px;font-size:.9rem;z-index:30}
+@media (max-width:600px){.art{padding:14px}.chips{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}.chips::-webkit-scrollbar{display:none}.chip{white-space:nowrap}html{scroll-padding-top:190px}}
+</style>
+</head>
+<body>
+<header class="top wrap">
+  <div class="row">
+    <a class="home" href="../"><img src="../logo-mark.png" alt="" width="40" height="20"><span><b>الباحث القانوني</b><small>Mostafa HR Hub</small></span></a>
+    <div class="tabs" role="tablist" aria-label="القانون">
+      <button role="tab" aria-selected="true" data-law="labor">قانون العمل 14/2025</button>
+      <button role="tab" aria-selected="false" data-law="ins" disabled title="قريبًا">التأمينات 148/2019 · قريبًا</button>
+    </div>
+    <button class="icon-btn" id="themeBtn" type="button" aria-label="الوضع الليلي">◐</button>
+  </div>
+</header>
+
+<div class="searchbar">
+  <div class="wrap">
+    <label class="sbox" for="q">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input id="q" type="search" placeholder="اكتب كلمة أو رقم مادة: الإجازة السنوية، م 90، الاستقالة…" autocomplete="off" enterkeyhint="search">
+      <button type="button" id="clearQ" hidden>مسح</button>
+    </label>
+    <div class="chips" id="chips"></div>
+    <div class="status"><span id="count"></span><label>القسم <select id="scope"><option value="">كل القانون</option></select></label></div>
+  </div>
+</div>
+
+<main class="wrap">
+  <div class="src"><span>ⓘ</span><div><b id="srcTitle">قانون العمل رقم 14 لسنة 2025</b> — <span id="srcName"></span>. النص مستخرج آليًا من النسخة الإلكترونية، وقد تظهر فيه أخطاء طباعية بسيطة؛ عند أي اختلاف فالمرجع هو <b>صورة الصفحة الأصلية</b> المتاحة تحت كل مادة. هذا المرجع للاطلاع ولا يُعد استشارة قانونية.</div></div>
+  <div id="out" class="list"><p class="empty">جارٍ تحميل نص القانون…</p></div>
+</main>
+<footer>© 2026 Mostafa El Mahdy · جميع الحقوق محفوظة · <a href="../terms.html">شروط الاستخدام</a></footer>
+
+<div class="viewer" id="viewer" hidden role="dialog" aria-modal="true" aria-label="صورة الصفحة الأصلية">
+  <div class="vbar"><b id="vTitle"></b><span style="display:flex;gap:8px"><button class="btn" id="vPrev" type="button">الصفحة السابقة</button><button class="btn" id="vNext" type="button">الصفحة التالية</button><button class="btn" id="vClose" type="button">إغلاق ✕</button></span></div>
+  <div class="vimg"><img id="vImg" alt="صفحة من الجريدة الرسمية"></div>
+</div>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+(function(){
+'use strict';
+var DATA=null, ARTS=[], vPage=1, MAXP=112;
+var TOPICS=['فترة الاختبار','عقد العمل','الأجر','ساعات العمل','الراحة الأسبوعية','الإجازة السنوية','الإجازة العارضة','الإجازة المرضية','الجزاءات','التحقيق','الفصل','الاستقالة','الإخطار','الغياب','القروض','شهادة','المرأة','الأطفال','المحكمة العمالية','التسوية الودية'];
+function $(s){return document.querySelector(s)}
+function el(t,a,c){var e=document.createElement(t);for(var k in (a||{}))e.setAttribute(k,a[k]);if(c!=null)e.textContent=c;return e}
+function toast(m){var t=$('#toast');t.textContent=m;t.hidden=false;clearTimeout(toast._);toast._=setTimeout(function(){t.hidden=true},2200)}
+function norm(s){return String(s).replace(/[ً-ٰٟـ]/g,'').replace(/[أإآٱ]/g,'ا').replace(/ة/g,'ه').replace(/ى/g,'ي').replace(/ؤ/g,'و').replace(/ئ/g,'ي').replace(/[٠-٩]/g,function(d){return '٠١٢٣٤٥٦٧٨٩'.indexOf(d)}).toLowerCase()}
+function label(a){return a.k==='iss'?'المادة '+['','الأولى','الثانية','الثالثة','الرابعة','الخامسة','السادسة','السابعة','الثامنة','التاسعة','العاشرة','الحادية عشرة','الثانية عشرة','الثالثة عشرة'][a.n]+' (من مواد الإصدار)':'المادة ('+a.n+')'}
+function aid(a){return (a.k==='iss'?'i':'m')+a.n}
+
+function index(){
+  ARTS=DATA.articles.map(function(a){var full=a.p.join(' ');var n=norm(full);return Object.assign({},a,{full:full,ns:n,nn:n.replace(/\s+/g,''),hs:norm(a.part+' '+a.chap)})});
+  var sel=$('#scope'),seen={};
+  ARTS.forEach(function(a){var key=a.part+'|'+a.chap;if(!a.part||seen[key])return;seen[key]=1;var o=el('option',{value:key},(a.chap?a.part.split(':')[0]+' › '+a.chap:a.part));sel.appendChild(o)});
+}
+
+function highlight(text,terms){
+  if(!terms.length)return [document.createTextNode(text)];
+  // build normalized map to original indices
+  var map=[],nt='';for(var i=0;i<text.length;i++){var c=norm(text[i]);for(var j=0;j<c.length;j++){map.push(i)}nt+=c}
+  var ranges=[];terms.forEach(function(t){if(t.length<2)return;var p=0;while((p=nt.indexOf(t,p))>-1){ranges.push([map[p],map[p+t.length-1]+1]);p+=t.length}});
+  ranges.sort(function(a,b){return a[0]-b[0]});
+  var out=[],pos=0;ranges.forEach(function(r){if(r[0]<pos)return;out.push(document.createTextNode(text.slice(pos,r[0])));out.push(el('mark',null,text.slice(r[0],r[1])));pos=r[1]});
+  out.push(document.createTextNode(text.slice(pos)));return out;
+}
+function linkify(nodes){
+  var res=[];nodes.forEach(function(nd){
+    if(nd.nodeType!==3){res.push(nd);return}
+    var s=nd.textContent,re=/(المادة|المادتين|المواد|بالمادة|للمادة)\s*\(?\s*(\d{1,3})\s*\)?/g,m,last=0;
+    while((m=re.exec(s))){res.push(document.createTextNode(s.slice(last,m.index)));var a=el('a',{class:'xref',href:'#m'+m[2]},m[0]);res.push(a);last=re.lastIndex}
+    res.push(document.createTextNode(s.slice(last)));
+  });return res;
+}
+function card(a,terms,full){
+  var c=el('article',{class:'art',id:aid(a)});
+  var h=el('div',{class:'ah'});h.appendChild(el('h3',null,label(a)));
+  h.appendChild(el('span',{class:'crumb'},[a.book&&a.book.split(':')[0],a.part,a.chap].filter(Boolean).join(' › ')));c.appendChild(h);
+  var ps=a.p, cut=false;
+  if(!full&&ps.length>4){var hit=terms.length?ps.findIndex(function(x){var n=norm(x);return terms.some(function(t){return n.indexOf(t)>-1})}):0;hit=Math.max(0,hit);ps=ps.slice(Math.max(0,hit-1),Math.max(0,hit-1)+3);cut=true}
+  ps.forEach(function(t){var p=el('p',/^\d+-/.test(t)?{class:'li'}:null);linkify(highlight(t,terms)).forEach(function(n){p.appendChild(n)});c.appendChild(p)});
+  if(cut){var mb=el('button',{class:'btn',type:'button',style:'margin-top:8px'},'عرض نص المادة كاملًا');mb.addEventListener('click',function(){c.replaceWith(card(a,terms,true))});c.appendChild(mb)}
+  var acts=el('div',{class:'acts'});
+  var img=el('button',{class:'btn',type:'button'},'📄 صورة الصفحة الأصلية (ص '+a.page+')');img.addEventListener('click',function(){openPage(a.page,label(a))});acts.appendChild(img);
+  var cp=el('button',{class:'btn',type:'button'},'نسخ النص مع المرجع');cp.addEventListener('click',function(){var txt=label(a)+' من '+DATA.title+':\n'+a.p.join('\n')+'\n('+DATA.source+')';copy(txt)});acts.appendChild(cp);
+  var ln=el('button',{class:'btn',type:'button'},'🔗 رابط المادة');ln.addEventListener('click',function(){copy(location.href.split('#')[0]+'#'+aid(a))});acts.appendChild(ln);
+  c.appendChild(acts);return c;
+}
+function copy(t){if(navigator.clipboard){navigator.clipboard.writeText(t).then(function(){toast('اتنسخ')},function(){toast('النسخ غير متاح هنا')})}else toast('النسخ غير متاح هنا')}
+
+function render(){
+  var out=$('#out');out.innerHTML='';if(!DATA)return;
+  var raw=$('#q').value.trim(),scope=$('#scope').value;$('#clearQ').hidden=!raw;
+  var list=ARTS.filter(function(a){return !scope||(a.part+'|'+a.chap)===scope});
+  var num=raw.replace(/[٠-٩]/g,function(d){return '٠١٢٣٤٥٦٧٨٩'.indexOf(d)}).match(/^(?:م|مادة|المادة)?\s*\(?\s*(\d{1,3})\s*\)?$/);
+  if(num){var a=ARTS.filter(function(x){return x.k==='law'&&x.n===+num[1]})[0];$('#count').textContent=a?'مادة واحدة':'لا توجد مادة بهذا الرقم (المواد من 1 إلى 298)';if(a)out.appendChild(card(a,[],true));return}
+  if(!raw&&!scope){renderToc(out);return}
+  var terms=norm(raw).split(/\s+/).map(function(t){return t.replace(/^(وال|بال|فال|كال|لل|ال)(?=.{3,})/,'')}).filter(function(t){return t.length>1});
+  var res=list.filter(function(a){return terms.every(function(t){return a.ns.indexOf(t)>-1||a.nn.indexOf(t)>-1||a.hs.indexOf(t)>-1})});
+  if(!terms.length)res=list;
+  // rank: phrase match first, then by count of hits
+  var phrase=norm(raw);
+  res=res.map(function(a){var sc=(a.ns.indexOf(phrase)>-1?100:0)+(a.hs.indexOf(phrase.replace(/^ال/,''))>-1?60:0);terms.forEach(function(t){sc+=a.ns.split(t).length-1});return [sc,a]}).sort(function(x,y){return y[0]-x[0]||(x[1].k===y[1].k?x[1].n-y[1].n:(x[1].k==='iss'?-1:1))}).map(function(x){return x[1]});
+  $('#count').textContent=res.length?(res.length+' مادة'):'';
+  if(!res.length){out.appendChild(el('p',{class:'empty'},'مفيش نتائج. جرّب كلمة أقصر أو مرادف، أو اكتب رقم المادة.'));return}
+  res.slice(0,60).forEach(function(a){out.appendChild(card(a,terms,false))});
+  if(res.length>60)out.appendChild(el('p',{class:'more'},'ظاهر أول 60 نتيجة. ضيّق البحث بكلمة إضافية أو اختار قسم.'));
+}
+function renderToc(out){
+  $('#count').textContent=ARTS.length+' مادة · تصفح حسب الأبواب والفصول';
+  var box=el('div',{class:'toc'}),lastBook=null,groups=[],g=null;
+  ARTS.forEach(function(a){var key=a.part+'|'+a.chap;if(!g||g.key!==key){g={key:key,book:a.book,part:a.part,chap:a.chap,arts:[]};groups.push(g)}g.arts.push(a)});
+  var byPart=[],pp=null;groups.forEach(function(x){if(!pp||pp.part!==x.part||pp.book!==x.book){pp={book:x.book,part:x.part,chaps:[]};byPart.push(pp)}pp.chaps.push(x)});
+  byPart.forEach(function(p){
+    if(p.book!==lastBook&&p.book){box.appendChild(el('div',{class:'book'},p.book));lastBook=p.book}
+    var d=el('div',{class:'part'}),b=el('button',{type:'button','aria-expanded':'false'});
+    var total=p.chaps.reduce(function(s,c){return s+c.arts.length},0),first=p.chaps[0].arts[0],last=p.chaps[p.chaps.length-1].arts.slice(-1)[0];
+    b.appendChild(document.createTextNode(p.part||'—'));b.appendChild(el('span',null,first.k==='iss'?total+' مواد':'م '+first.n+' – '+last.n));
+    var ul=el('ul');ul.hidden=true;
+    p.chaps.forEach(function(c){var li=el('li'),bt=el('button',{type:'button'});bt.appendChild(document.createTextNode(c.chap||(p.part)));var f=c.arts[0],l=c.arts[c.arts.length-1];bt.appendChild(el('span',null,f.k==='iss'?'':'م '+f.n+' – '+l.n));bt.addEventListener('click',function(){$('#scope').value=c.key;$('#q').value='';render();window.scrollTo({top:0})});li.appendChild(bt);ul.appendChild(li)});
+    b.addEventListener('click',function(){ul.hidden=!ul.hidden;b.setAttribute('aria-expanded',String(!ul.hidden))});
+    d.appendChild(b);d.appendChild(ul);box.appendChild(d);
+  });
+  out.appendChild(box);
+}
+function openPage(p,title){vPage=p;$('#vTitle').textContent=(title?title+' · ':'')+'الجريدة الرسمية – صفحة '+p;$('#vImg').src='pages/p'+String(p).padStart(3,'0')+'.webp';$('#viewer').hidden=false;$('#vClose').focus()}
+function goHash(){var m=location.hash.match(/^#(m|i)(\d{1,3})$/);if(!m||!DATA)return;var a=ARTS.filter(function(x){return x.k===(m[1]==='i'?'iss':'law')&&x.n===+m[2]})[0];if(!a)return;$('#q').value=m[1]==='m'?String(a.n):'';$('#scope').value='';if(m[1]==='m'){render()}else{var out=$('#out');out.innerHTML='';out.appendChild(card(a,[],true))}window.scrollTo({top:0})}
+
+/* events */
+var tmr;$('#q').addEventListener('input',function(){clearTimeout(tmr);tmr=setTimeout(render,160)});
+$('#clearQ').addEventListener('click',function(){$('#q').value='';render();$('#q').focus()});
+$('#scope').addEventListener('change',render);
+TOPICS.forEach(function(t){var b=el('button',{class:'chip',type:'button'},t);b.addEventListener('click',function(){$('#q').value=t;$('#scope').value='';render()});$('#chips').appendChild(b)});
+$('#vClose').addEventListener('click',function(){$('#viewer').hidden=true});
+$('#vPrev').addEventListener('click',function(){if(vPage>1)openPage(vPage-1)});
+$('#vNext').addEventListener('click',function(){if(vPage<MAXP)openPage(vPage+1)});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')$('#viewer').hidden=true});
+$('#viewer').addEventListener('click',function(e){if(e.target.id==='viewer')$('#viewer').hidden=true});
+window.addEventListener('hashchange',goHash);
+(function(){var root=document.documentElement;var t=null;try{t=localStorage.getItem('mhh-theme-t')}catch(e){}if(t)root.setAttribute('data-theme',JSON.parse(t));$('#themeBtn').addEventListener('click',function(){var c=root.getAttribute('data-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');var n=c==='dark'?'light':'dark';root.setAttribute('data-theme',n);try{localStorage.setItem('mhh-theme-t',JSON.stringify(n))}catch(e){}})})();
+
+fetch('labor-14-2025.json').then(function(r){return r.json()}).then(function(d){DATA=d;$('#srcName').textContent=d.source;index();if(location.hash)goHash();else render()}).catch(function(){$('#out').innerHTML='';$('#out').appendChild(el('p',{class:'empty'},'تعذّر تحميل نص القانون. أعد تحميل الصفحة.'))});
+})();
+</script>
+</body>
+</html>
