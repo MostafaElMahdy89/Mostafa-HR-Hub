@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>الباحث القانوني · Mostafa HR Hub</title>
-<meta name="description" content="ابحث في نص قانون العمل المصري رقم 14 لسنة 2025 مادة بمادة، مع صورة الصفحة الأصلية من الجريدة الرسمية.">
+<meta name="description" content="ابحث في قانون العمل 14 لسنة 2025 وقانون التأمينات الاجتماعية 148 لسنة 2019 ولائحته التنفيذية، مع صور الصفحات الأصلية من الجريدة الرسمية.">
 <link rel="icon" href="../logo-mark.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -62,7 +62,8 @@ header.top{background:var(--band);color:var(--on-band)}
 .chip{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:5px 13px;font-size:.88rem;cursor:pointer;color:var(--ink)}
 .chip:hover{border-color:var(--brand);color:var(--brand)}
 .status{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-top:10px;color:var(--muted);font-size:.86rem}
-.status select{border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:4px 8px;max-width:100%}
+.status label{display:flex;gap:6px;align-items:center;min-width:0;max-width:100%}
+.status select{border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:4px 8px;max-width:100%;min-width:0;width:min(420px,70vw)}
 
 main{padding-block:20px 40px}
 .src{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px 16px;font-size:.86rem;color:var(--muted);margin-bottom:18px;display:flex;gap:10px;align-items:flex-start}
@@ -77,6 +78,15 @@ main{padding-block:20px 40px}
 .art p.li{padding-inline-start:14px}
 .art mark{background:var(--mark);color:inherit;border-radius:3px;padding:0 1px}
 .art a.xref{color:var(--brand);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.scan{display:flex;flex-direction:column;gap:6px;margin-top:10px}
+.crop{position:relative;width:100%;overflow:hidden;direction:ltr;background:#fff;border-radius:8px;border:1px solid var(--line)}
+.crop img{position:absolute;top:0;left:0;max-width:none;height:auto}
+:root[data-theme="dark"] .crop img{filter:invert(.92) hue-rotate(180deg)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .crop img{filter:invert(.92) hue-rotate(180deg)}}
+.ocrhit{font-size:.88rem;color:var(--muted)}
+details.ocr{margin-top:10px;font-size:.85rem;color:var(--muted)}
+details.ocr summary{cursor:pointer}
+details.ocr p{margin:4px 0}
 .acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
 .btn{display:inline-flex;align-items:center;gap:6px;border:1.5px solid var(--line);background:transparent;color:var(--ink);padding:5px 12px;border-radius:999px;font-weight:600;cursor:pointer;font-size:.82rem}
 .btn:hover{border-color:var(--brand);color:var(--brand)}
@@ -110,7 +120,8 @@ footer a{color:inherit}
     <a class="home" href="../"><img src="../logo-mark.png" alt="" width="40" height="20"><span><b>الباحث القانوني</b><small>Mostafa HR Hub</small></span></a>
     <div class="tabs" role="tablist" aria-label="القانون">
       <button role="tab" aria-selected="true" data-law="labor">قانون العمل 14/2025</button>
-      <button role="tab" aria-selected="false" data-law="ins" disabled title="قريبًا">التأمينات 148/2019 · قريبًا</button>
+      <button role="tab" aria-selected="false" data-law="ins">قانون التأمينات 148/2019</button>
+      <button role="tab" aria-selected="false" data-law="regs">اللائحة التنفيذية للتأمينات</button>
     </div>
     <button class="icon-btn" id="themeBtn" type="button" aria-label="الوضع الليلي">◐</button>
   </div>
@@ -120,7 +131,7 @@ footer a{color:inherit}
   <div class="wrap">
     <label class="sbox" for="q">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-      <input id="q" type="search" placeholder="اكتب كلمة أو رقم مادة: الإجازة السنوية، م 90، الاستقالة…" autocomplete="off" enterkeyhint="search">
+      <input id="q" type="search" placeholder="اكتب كلمة أو رقم مادة: المعاش، م 90، الاستقالة…" autocomplete="off" enterkeyhint="search">
       <button type="button" id="clearQ" hidden>مسح</button>
     </label>
     <div class="chips" id="chips"></div>
@@ -129,7 +140,7 @@ footer a{color:inherit}
 </div>
 
 <main class="wrap">
-  <div class="src"><span>ⓘ</span><div><b id="srcTitle">قانون العمل رقم 14 لسنة 2025</b> — <span id="srcName"></span>. النص مستخرج آليًا من النسخة الإلكترونية، وقد تظهر فيه أخطاء طباعية بسيطة؛ عند أي اختلاف فالمرجع هو <b>صورة الصفحة الأصلية</b> المتاحة تحت كل مادة. هذا المرجع للاطلاع ولا يُعد استشارة قانونية.</div></div>
+  <div class="src"><span>ⓘ</span><div><b id="srcTitle"></b> — <span id="srcName"></span>. <span id="srcNote"></span> هذا المرجع للاطلاع ولا يُعد استشارة قانونية.</div></div>
   <div id="out" class="list"><p class="empty">جارٍ تحميل نص القانون…</p></div>
 </main>
 <footer>© 2026 Mostafa El Mahdy · جميع الحقوق محفوظة · <a href="../terms.html">شروط الاستخدام</a></footer>
@@ -143,106 +154,149 @@ footer a{color:inherit}
 <script>
 (function(){
 'use strict';
-var DATA=null, ARTS=[], vPage=1, MAXP=112;
-var TOPICS=['فترة الاختبار','عقد العمل','الأجر','ساعات العمل','الراحة الأسبوعية','الإجازة السنوية','الإجازة العارضة','الإجازة المرضية','الجزاءات','التحقيق','الفصل','الاستقالة','الإخطار','الغياب','القروض','شهادة','المرأة','الأطفال','المحكمة العمالية','التسوية الودية'];
+var SETS={
+  labor:{file:'labor-14-2025.json',pages:'pages/',maxp:112,pre:'L',kind:'text',max:298,
+    topics:['فترة الاختبار','عقد العمل','الأجر','ساعات العمل','الراحة الأسبوعية','الإجازة السنوية','الإجازة العارضة','الإجازة المرضية','الجزاءات','التحقيق','الفصل','الاستقالة','الإخطار','الغياب','القروض','شهادة','المرأة','الأطفال','المحكمة العمالية','التسوية الودية'],
+    note:'النص مستخرج آليًا من النسخة الإلكترونية، وقد تظهر فيه أخطاء طباعية بسيطة؛ عند أي اختلاف فالمرجع هو صورة الصفحة الأصلية المتاحة تحت كل مادة.'},
+  ins:{file:'ins-148-2019.json',pages:'ins-pages/',maxp:153,pre:'T',kind:'scan',max:170,
+    topics:['أجر الاشتراك','نسب الاشتراك','الحد الأدنى','سن الشيخوخة','المعاش','العجز','الوفاة','إصابة العمل','تأمين المرض','البطالة','المكافأة','تعويض الدفعة الواحدة','المستحقين','الأرملة','الجمع بين','صاحب العمل','غرامة','التقسيط','العمالة غير المنتظمة'],
+    note:'نسخة الجريدة الرسمية لهذا القانون صور ممسوحة ضوئيًا؛ لذلك تُعرض كل مادة كقصاصة من صورة الجريدة نفسها، والبحث يتم على نص مقروء آليًا (OCR) قد تفوته بعض الكلمات وتختلف فيه الأرقام، فاعتمد دائمًا على الصورة.'},
+  regs:{file:'ins-regs-2021.json',pages:'regs-pages/',maxp:250,pre:'R',kind:'text',max:319,
+    topics:['أجر الاشتراك','دخل الاشتراك','نسب الاشتراكات','ملف التأمين','إجراءات الاشتراك','نموذج','التقسيط','المعاش','إصابة العمل','الفحص الطبي','تعويض الأجر','البطالة','المقاولات','النقل البري','المستحقين','مستندات الصرف'],
+    note:'النص مستخرج آليًا من النسخة الإلكترونية للجريدة الرسمية، وفيه أخطاء ترتيب حروف في بعض الكلمات والمعادلات؛ المرجع هو صورة الصفحة الأصلية المتاحة تحت كل مادة.'}
+};
+var cur='labor', DATA={}, ARTS=[], vPage=1;
+var ORD=['','الأولى','الثانية','الثالثة','الرابعة','الخامسة','السادسة','السابعة','الثامنة','التاسعة','العاشرة','الحادية عشرة','الثانية عشرة','الثالثة عشرة'];
 function $(s){return document.querySelector(s)}
 function el(t,a,c){var e=document.createElement(t);for(var k in (a||{}))e.setAttribute(k,a[k]);if(c!=null)e.textContent=c;return e}
 function toast(m){var t=$('#toast');t.textContent=m;t.hidden=false;clearTimeout(toast._);toast._=setTimeout(function(){t.hidden=true},2200)}
 function norm(s){return String(s).replace(/[ً-ٰٟـ]/g,'').replace(/[أإآٱ]/g,'ا').replace(/ة/g,'ه').replace(/ى/g,'ي').replace(/ؤ/g,'و').replace(/ئ/g,'ي').replace(/[٠-٩]/g,function(d){return '٠١٢٣٤٥٦٧٨٩'.indexOf(d)}).toLowerCase()}
-function label(a){return a.k==='iss'?'المادة '+['','الأولى','الثانية','الثالثة','الرابعة','الخامسة','السادسة','السابعة','الثامنة','التاسعة','العاشرة','الحادية عشرة','الثانية عشرة','الثالثة عشرة'][a.n]+' (من مواد الإصدار)':'المادة ('+a.n+')'}
-function aid(a){return (a.k==='iss'?'i':'m')+a.n}
+function C(){return SETS[cur]}
+function label(a){if(a.k==='tbl')return a.label;return a.k==='iss'?'المادة '+ORD[a.n]+' (من مواد الإصدار)':'المادة ('+a.n+')'}
+function aid(a){return C().pre+'-'+(a.k==='iss'?'i':a.k==='tbl'?'t':'m')+a.n}
+function txtOf(a){return a.p?a.p.join(' '):(a.ocr||'')}
 
 function index(){
-  ARTS=DATA.articles.map(function(a){var full=a.p.join(' ');var n=norm(full);return Object.assign({},a,{full:full,ns:n,nn:n.replace(/\s+/g,''),hs:norm(a.part+' '+a.chap)})});
-  var sel=$('#scope'),seen={};
-  ARTS.forEach(function(a){var key=a.part+'|'+a.chap;if(!a.part||seen[key])return;seen[key]=1;var o=el('option',{value:key},(a.chap?a.part.split(':')[0]+' › '+a.chap:a.part));sel.appendChild(o)});
+  var d=DATA[cur];var list=d.articles.concat(d.tables||[]);
+  ARTS=list.map(function(a){var n=norm(txtOf(a)+' '+(a.title||'')+' '+(a.label||''));return Object.assign({},a,{ns:n,nn:n.replace(/\s+/g,''),hs:norm((a.part||'')+' '+(a.chap||''))})});
+  var sel=$('#scope');sel.innerHTML='';sel.appendChild(el('option',{value:''},'كل النص'));var seen={};
+  ARTS.forEach(function(a){var key=a.part+'|'+a.chap;if(!a.part||seen[key])return;seen[key]=1;sel.appendChild(el('option',{value:key},a.chap?a.part.split(':')[0]+' › '+a.chap:a.part))});
+  $('#srcTitle').textContent=d.title;$('#srcName').textContent=d.source;$('#srcNote').textContent=C().note;
+  var ch=$('#chips');ch.innerHTML='';C().topics.forEach(function(t){var b=el('button',{class:'chip',type:'button'},t);b.addEventListener('click',function(){$('#q').value=t;$('#scope').value='';render()});ch.appendChild(b)});
 }
-
 function highlight(text,terms){
   if(!terms.length)return [document.createTextNode(text)];
-  // build normalized map to original indices
-  var map=[],nt='';for(var i=0;i<text.length;i++){var c=norm(text[i]);for(var j=0;j<c.length;j++){map.push(i)}nt+=c}
+  var map=[],nt='';for(var i=0;i<text.length;i++){var c=norm(text[i]);for(var j=0;j<c.length;j++)map.push(i);nt+=c}
   var ranges=[];terms.forEach(function(t){if(t.length<2)return;var p=0;while((p=nt.indexOf(t,p))>-1){ranges.push([map[p],map[p+t.length-1]+1]);p+=t.length}});
   ranges.sort(function(a,b){return a[0]-b[0]});
   var out=[],pos=0;ranges.forEach(function(r){if(r[0]<pos)return;out.push(document.createTextNode(text.slice(pos,r[0])));out.push(el('mark',null,text.slice(r[0],r[1])));pos=r[1]});
   out.push(document.createTextNode(text.slice(pos)));return out;
 }
 function linkify(nodes){
-  var res=[];nodes.forEach(function(nd){
+  var pre=C().pre,res=[];nodes.forEach(function(nd){
     if(nd.nodeType!==3){res.push(nd);return}
     var s=nd.textContent,re=/(المادة|المادتين|المواد|بالمادة|للمادة)\s*\(?\s*(\d{1,3})\s*\)?/g,m,last=0;
-    while((m=re.exec(s))){res.push(document.createTextNode(s.slice(last,m.index)));var a=el('a',{class:'xref',href:'#m'+m[2]},m[0]);res.push(a);last=re.lastIndex}
+    while((m=re.exec(s))){res.push(document.createTextNode(s.slice(last,m.index)));res.push(el('a',{class:'xref',href:'#'+pre+'-m'+m[2]},m[0]));last=re.lastIndex}
     res.push(document.createTextNode(s.slice(last)));
   });return res;
+}
+function crop(seg){
+  var d=DATA[cur],p=seg[0],x0=seg[1],y0=seg[2],x1=seg[3],y1=seg[4],pw=d.pw[p],cw=x1-x0,ch=y1-y0;
+  var box=el('div',{class:'crop'});box.style.paddingTop=(ch/cw*100)+'%';
+  var im=el('img',{src:C().pages+'p'+String(p).padStart(3,'0')+'.webp',alt:'',loading:'lazy'});
+  im.style.width=(pw/cw*100)+'%';im.style.marginLeft=(-x0/cw*100)+'%';im.style.marginTop=(-y0/cw*100)+'%';
+  box.appendChild(im);return box;
 }
 function card(a,terms,full){
   var c=el('article',{class:'art',id:aid(a)});
   var h=el('div',{class:'ah'});h.appendChild(el('h3',null,label(a)));
   h.appendChild(el('span',{class:'crumb'},[a.book&&a.book.split(':')[0],a.part,a.chap].filter(Boolean).join(' › ')));c.appendChild(h);
-  var ps=a.p, cut=false;
-  if(!full&&ps.length>4){var hit=terms.length?ps.findIndex(function(x){var n=norm(x);return terms.some(function(t){return n.indexOf(t)>-1})}):0;hit=Math.max(0,hit);ps=ps.slice(Math.max(0,hit-1),Math.max(0,hit-1)+3);cut=true}
-  ps.forEach(function(t){var p=el('p',/^\d+-/.test(t)?{class:'li'}:null);linkify(highlight(t,terms)).forEach(function(n){p.appendChild(n)});c.appendChild(p)});
-  if(cut){var mb=el('button',{class:'btn',type:'button',style:'margin-top:8px'},'عرض نص المادة كاملًا');mb.addEventListener('click',function(){c.replaceWith(card(a,terms,true))});c.appendChild(mb)}
+  if(a.k==='tbl'){
+    if(a.title)c.appendChild(el('p',null,a.title));
+    var pp=el('div',{class:'acts'});for(var q=a.pages[0];q<=a.pages[1];q++){(function(q){var b=el('button',{class:'btn',type:'button'},'📄 ص '+q);b.addEventListener('click',function(){openPage(q,a.label)});pp.appendChild(b)})(q)}
+    c.appendChild(pp);return c;
+  }
+  if(a.seg){
+    var sc=el('div',{class:'scan'});a.seg.forEach(function(s){sc.appendChild(crop(s))});c.appendChild(sc);
+    if(terms.length){var hit=a.ocr.split('\n').filter(function(l){var n=norm(l);return terms.some(function(t){return n.indexOf(t)>-1})}).slice(0,2);hit.forEach(function(l){var p=el('p',{class:'ocrhit'});highlight(l,terms).forEach(function(n){p.appendChild(n)});c.appendChild(p)})}
+    var det=el('details',{class:'ocr'});det.appendChild(el('summary',null,'النص المقروء آليًا (للبحث فقط، قد يحتوي أخطاء)'));a.ocr.split('\n').forEach(function(l){det.appendChild(el('p',null,l))});c.appendChild(det);
+  } else {
+    var ps=a.p,cut=false;
+    if(!full&&ps.length>4){var hit2=terms.length?ps.findIndex(function(x){var n=norm(x);return terms.some(function(t){return n.indexOf(t)>-1})}):0;hit2=Math.max(0,hit2);ps=ps.slice(Math.max(0,hit2-1),Math.max(0,hit2-1)+3);cut=true}
+    ps.forEach(function(t){var p=el('p',/^\d+-/.test(t)?{class:'li'}:null);linkify(highlight(t,terms)).forEach(function(n){p.appendChild(n)});c.appendChild(p)});
+    if(cut){var mb=el('button',{class:'btn',type:'button',style:'margin-top:8px'},'عرض نص المادة كاملًا');mb.addEventListener('click',function(){c.replaceWith(card(a,terms,true))});c.appendChild(mb)}
+  }
   var acts=el('div',{class:'acts'});
   var img=el('button',{class:'btn',type:'button'},'📄 صورة الصفحة الأصلية (ص '+a.page+')');img.addEventListener('click',function(){openPage(a.page,label(a))});acts.appendChild(img);
-  var cp=el('button',{class:'btn',type:'button'},'نسخ النص مع المرجع');cp.addEventListener('click',function(){var txt=label(a)+' من '+DATA.title+':\n'+a.p.join('\n')+'\n('+DATA.source+')';copy(txt)});acts.appendChild(cp);
+  if(a.p){var cp=el('button',{class:'btn',type:'button'},'نسخ النص مع المرجع');cp.addEventListener('click',function(){copy(label(a)+' من '+DATA[cur].title+':\n'+a.p.join('\n')+'\n('+DATA[cur].source+')')});acts.appendChild(cp)}
+  else{var cr=el('button',{class:'btn',type:'button'},'نسخ المرجع');cr.addEventListener('click',function(){copy(label(a)+' من '+DATA[cur].title+' ('+DATA[cur].source+'، ص '+a.page+')')});acts.appendChild(cr)}
   var ln=el('button',{class:'btn',type:'button'},'🔗 رابط المادة');ln.addEventListener('click',function(){copy(location.href.split('#')[0]+'#'+aid(a))});acts.appendChild(ln);
   c.appendChild(acts);return c;
 }
 function copy(t){if(navigator.clipboard){navigator.clipboard.writeText(t).then(function(){toast('اتنسخ')},function(){toast('النسخ غير متاح هنا')})}else toast('النسخ غير متاح هنا')}
 
 function render(){
-  var out=$('#out');out.innerHTML='';if(!DATA)return;
+  var out=$('#out');out.innerHTML='';if(!DATA[cur])return;
   var raw=$('#q').value.trim(),scope=$('#scope').value;$('#clearQ').hidden=!raw;
   var list=ARTS.filter(function(a){return !scope||(a.part+'|'+a.chap)===scope});
   var num=raw.replace(/[٠-٩]/g,function(d){return '٠١٢٣٤٥٦٧٨٩'.indexOf(d)}).match(/^(?:م|مادة|المادة)?\s*\(?\s*(\d{1,3})\s*\)?$/);
-  if(num){var a=ARTS.filter(function(x){return x.k==='law'&&x.n===+num[1]})[0];$('#count').textContent=a?'مادة واحدة':'لا توجد مادة بهذا الرقم (المواد من 1 إلى 298)';if(a)out.appendChild(card(a,[],true));return}
+  if(num){var a=ARTS.filter(function(x){return x.k==='law'&&x.n===+num[1]})[0];$('#count').textContent=a?'مادة واحدة':'لا توجد مادة بهذا الرقم (المواد من 1 إلى '+C().max+')';if(a)out.appendChild(card(a,[],true));return}
   if(!raw&&!scope){renderToc(out);return}
   var terms=norm(raw).split(/\s+/).map(function(t){return t.replace(/^(وال|بال|فال|كال|لل|ال)(?=.{3,})/,'')}).filter(function(t){return t.length>1});
-  var res=list.filter(function(a){return terms.every(function(t){return a.ns.indexOf(t)>-1||a.nn.indexOf(t)>-1||a.hs.indexOf(t)>-1})});
-  if(!terms.length)res=list;
-  // rank: phrase match first, then by count of hits
+  var res=terms.length?list.filter(function(a){return terms.every(function(t){return a.ns.indexOf(t)>-1||a.nn.indexOf(t)>-1||a.hs.indexOf(t)>-1})}):list;
   var phrase=norm(raw);
-  res=res.map(function(a){var sc=(a.ns.indexOf(phrase)>-1?100:0)+(a.hs.indexOf(phrase.replace(/^ال/,''))>-1?60:0);terms.forEach(function(t){sc+=a.ns.split(t).length-1});return [sc,a]}).sort(function(x,y){return y[0]-x[0]||(x[1].k===y[1].k?x[1].n-y[1].n:(x[1].k==='iss'?-1:1))}).map(function(x){return x[1]});
-  $('#count').textContent=res.length?(res.length+' مادة'):'';
+  res=res.map(function(a){var sc=(a.ns.indexOf(phrase)>-1?100:0)+(a.hs.indexOf(phrase.replace(/^ال/,''))>-1?60:0);terms.forEach(function(t){sc+=a.ns.split(t).length-1});return [sc,a]}).sort(function(x,y){return y[0]-x[0]||((x[1].k==='law'?1e3:0)+x[1].n)-((y[1].k==='law'?1e3:0)+y[1].n)}).map(function(x){return x[1]});
+  $('#count').textContent=res.length?(res.length+' نتيجة'):'';
   if(!res.length){out.appendChild(el('p',{class:'empty'},'مفيش نتائج. جرّب كلمة أقصر أو مرادف، أو اكتب رقم المادة.'));return}
-  res.slice(0,60).forEach(function(a){out.appendChild(card(a,terms,false))});
-  if(res.length>60)out.appendChild(el('p',{class:'more'},'ظاهر أول 60 نتيجة. ضيّق البحث بكلمة إضافية أو اختار قسم.'));
+  res.slice(0,40).forEach(function(a){out.appendChild(card(a,terms,false))});
+  if(res.length>40)out.appendChild(el('p',{class:'more'},'ظاهر أول 40 نتيجة. ضيّق البحث بكلمة إضافية أو اختار قسم.'));
 }
 function renderToc(out){
-  $('#count').textContent=ARTS.length+' مادة · تصفح حسب الأبواب والفصول';
+  var nLaw=ARTS.filter(function(a){return a.k==='law'}).length;
+  $('#count').textContent=nLaw+' مادة · تصفح حسب الأبواب والفصول';
   var box=el('div',{class:'toc'}),lastBook=null,groups=[],g=null;
   ARTS.forEach(function(a){var key=a.part+'|'+a.chap;if(!g||g.key!==key){g={key:key,book:a.book,part:a.part,chap:a.chap,arts:[]};groups.push(g)}g.arts.push(a)});
   var byPart=[],pp=null;groups.forEach(function(x){if(!pp||pp.part!==x.part||pp.book!==x.book){pp={book:x.book,part:x.part,chaps:[]};byPart.push(pp)}pp.chaps.push(x)});
   byPart.forEach(function(p){
     if(p.book!==lastBook&&p.book){box.appendChild(el('div',{class:'book'},p.book));lastBook=p.book}
     var d=el('div',{class:'part'}),b=el('button',{type:'button','aria-expanded':'false'});
-    var total=p.chaps.reduce(function(s,c){return s+c.arts.length},0),first=p.chaps[0].arts[0],last=p.chaps[p.chaps.length-1].arts.slice(-1)[0];
-    b.appendChild(document.createTextNode(p.part||'—'));b.appendChild(el('span',null,first.k==='iss'?total+' مواد':'م '+first.n+' – '+last.n));
+    var arts=[].concat.apply([],p.chaps.map(function(c){return c.arts})),first=arts[0],last=arts[arts.length-1];
+    b.appendChild(document.createTextNode(p.part||'—'));b.appendChild(el('span',null,first.k==='law'?'م '+first.n+' – '+last.n:arts.length+(first.k==='tbl'?' بند':' مواد')));
     var ul=el('ul');ul.hidden=true;
-    p.chaps.forEach(function(c){var li=el('li'),bt=el('button',{type:'button'});bt.appendChild(document.createTextNode(c.chap||(p.part)));var f=c.arts[0],l=c.arts[c.arts.length-1];bt.appendChild(el('span',null,f.k==='iss'?'':'م '+f.n+' – '+l.n));bt.addEventListener('click',function(){$('#scope').value=c.key;$('#q').value='';render();window.scrollTo({top:0})});li.appendChild(bt);ul.appendChild(li)});
+    p.chaps.forEach(function(c){var li=el('li'),bt=el('button',{type:'button'});bt.appendChild(document.createTextNode(c.chap||p.part));var f=c.arts[0],l=c.arts[c.arts.length-1];bt.appendChild(el('span',null,f.k==='law'?'م '+f.n+' – '+l.n:''));bt.addEventListener('click',function(){$('#scope').value=c.key;$('#q').value='';render();window.scrollTo({top:0})});li.appendChild(bt);ul.appendChild(li)});
     b.addEventListener('click',function(){ul.hidden=!ul.hidden;b.setAttribute('aria-expanded',String(!ul.hidden))});
     d.appendChild(b);d.appendChild(ul);box.appendChild(d);
   });
   out.appendChild(box);
 }
-function openPage(p,title){vPage=p;$('#vTitle').textContent=(title?title+' · ':'')+'الجريدة الرسمية – صفحة '+p;$('#vImg').src='pages/p'+String(p).padStart(3,'0')+'.webp';$('#viewer').hidden=false;$('#vClose').focus()}
-function goHash(){var m=location.hash.match(/^#(m|i)(\d{1,3})$/);if(!m||!DATA)return;var a=ARTS.filter(function(x){return x.k===(m[1]==='i'?'iss':'law')&&x.n===+m[2]})[0];if(!a)return;$('#q').value=m[1]==='m'?String(a.n):'';$('#scope').value='';if(m[1]==='m'){render()}else{var out=$('#out');out.innerHTML='';out.appendChild(card(a,[],true))}window.scrollTo({top:0})}
-
+function openPage(p,title){vPage=p;$('#vTitle').textContent=(title?title+' · ':'')+'الجريدة الرسمية – صفحة '+p;$('#vImg').src=C().pages+'p'+String(p).padStart(3,'0')+'.webp';$('#viewer').hidden=false;$('#vClose').focus()}
+function load(set,cb){
+  cur=set;document.querySelectorAll('.tabs button').forEach(function(b){b.setAttribute('aria-selected',String(b.dataset.law===set))});
+  try{localStorage.setItem('mhh-law-tab',set)}catch(e){}
+  if(DATA[set]){index();cb?cb():render();return}
+  $('#out').innerHTML='';$('#out').appendChild(el('p',{class:'empty'},'جارٍ التحميل…'));
+  fetch(SETS[set].file).then(function(r){return r.json()}).then(function(d){DATA[set]=d;if(cur!==set)return;index();cb?cb():render()}).catch(function(){$('#out').innerHTML='';$('#out').appendChild(el('p',{class:'empty'},'تعذّر التحميل. أعد تحميل الصفحة.'))});
+}
+function goHash(){
+  var m=location.hash.match(/^#(?:([LTR])-)?([mit])(\d{1,3})$/);if(!m)return false;
+  var set={L:'labor',T:'ins',R:'regs'}[m[1]||'L'];
+  load(set,function(){var k={m:'law',i:'iss',t:'tbl'}[m[2]];var a=ARTS.filter(function(x){return x.k===k&&x.n===+m[3]})[0];if(!a){render();return}
+    $('#q').value='';$('#scope').value='';var out=$('#out');out.innerHTML='';$('#count').textContent=label(a);out.appendChild(card(a,[],true));window.scrollTo({top:0})});
+  return true;
+}
 /* events */
 var tmr;$('#q').addEventListener('input',function(){clearTimeout(tmr);tmr=setTimeout(render,160)});
 $('#clearQ').addEventListener('click',function(){$('#q').value='';render();$('#q').focus()});
 $('#scope').addEventListener('change',render);
-TOPICS.forEach(function(t){var b=el('button',{class:'chip',type:'button'},t);b.addEventListener('click',function(){$('#q').value=t;$('#scope').value='';render()});$('#chips').appendChild(b)});
+document.querySelectorAll('.tabs button').forEach(function(b){b.addEventListener('click',function(){$('#q').value='';$('#scope').value='';history.replaceState(null,'',location.pathname);load(b.dataset.law)})});
 $('#vClose').addEventListener('click',function(){$('#viewer').hidden=true});
 $('#vPrev').addEventListener('click',function(){if(vPage>1)openPage(vPage-1)});
-$('#vNext').addEventListener('click',function(){if(vPage<MAXP)openPage(vPage+1)});
+$('#vNext').addEventListener('click',function(){if(vPage<C().maxp)openPage(vPage+1)});
 document.addEventListener('keydown',function(e){if(e.key==='Escape')$('#viewer').hidden=true});
 $('#viewer').addEventListener('click',function(e){if(e.target.id==='viewer')$('#viewer').hidden=true});
 window.addEventListener('hashchange',goHash);
 (function(){var root=document.documentElement;var t=null;try{t=localStorage.getItem('mhh-theme-t')}catch(e){}if(t)root.setAttribute('data-theme',JSON.parse(t));$('#themeBtn').addEventListener('click',function(){var c=root.getAttribute('data-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');var n=c==='dark'?'light':'dark';root.setAttribute('data-theme',n);try{localStorage.setItem('mhh-theme-t',JSON.stringify(n))}catch(e){}})})();
-
-fetch('labor-14-2025.json').then(function(r){return r.json()}).then(function(d){DATA=d;$('#srcName').textContent=d.source;index();if(location.hash)goHash();else render()}).catch(function(){$('#out').innerHTML='';$('#out').appendChild(el('p',{class:'empty'},'تعذّر تحميل نص القانون. أعد تحميل الصفحة.'))});
+if(!goHash()){var st='labor';try{st=localStorage.getItem('mhh-law-tab')||'labor'}catch(e){}if(!SETS[st])st='labor';load(st)}
 })();
 </script>
 </body>
